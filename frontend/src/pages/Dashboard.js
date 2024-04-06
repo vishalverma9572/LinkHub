@@ -25,12 +25,12 @@ export default function Dashboard(props) {
       setData(data);
       if (data.status === 'failed') {
         // Redirect to login if token is invalid or expired
-        window.location.href = '/login';
+        window.location.href = '/signin';
       }
       // Handle the fetched data here (e.g., update state)
     }
     if(localStorage.getItem('token') === null){
-      window.location.href = '/login';
+      window.location.href = '/signin';
     }
     fetchData(); // Call the fetchData function when the component mounts
   }, []); // Empty dependency array ensures this effect runs only once on mount
