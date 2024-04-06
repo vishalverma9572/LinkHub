@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Form</title>
+    <link rel="stylesheet" href="form.css" />
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="script.js"></script>
+    </head>
+    <body>
+    <section class="container">
+            
+        <div class="container2">
+		    <input type="file" id="file" accept="image/*" hidden>
+		    <div class="img-area" data-img="">
+			<!-- <i class='bx bxs-cloud-upload icon'></i> -->
+            <img src="images/user-profile-icon.png" width="5px" height="5px" >
+			<!-- <h3>Upload Image</h3> -->
+		    </div>
+		    <button class="select-image"><img src="images/pencil.png" width="40px" height="40px"></button>
+	    </div>
+	
+	<script src="imgupload.js"></script>
+            <form action="#" class="form">
+                <div class="input-box"> 
+                    <label>Linkhub Alias</label>
+                    <input type="text" placeholder="What should we call this LinkHub?" required/>
+                </div>
+                <div class="row">
+                    <div class="input-box">
+                        <label>Email</label>
+                        <input type="text" placeholder="Enter Email" required/>
+                    </div>
+                    <div class="input-box">
+                        <label>Phone Number</label>
+                        <input type="text" placeholder="Enter Phone Number" required/>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>bio</label>
+                    <textarea placeholder="Enter your bio"></textarea>
+                </div>
+                <h4 class="socials">Socials</h4>
+                <div class="row-handles">
+                    <div class="handles">
+                   <img src="images/instagram_icon.png" height="60px" width="60px">
+                   <div class="input-box-handles"><input type="text" placeholder="id"></div>
+                   </div>
+                   <div class="handles">
+                   <img src="images/instagram_icon.png" height="60px" width="60px">
+                   <div class="input-box-handles"><input type="text" placeholder="id"></div>
+                   </div>
+                </div>
+                <div class="row-handles">
+                    <div class="handles">
+                   <img src="images/instagram_icon.png" height="60px" width="60px">
+                   <div class="input-box-handles"><input type="text" placeholder="id"></div>
+                   </div>
+                   <div class="handles">
+                   <img src="images/instagram_icon.png" height="60px" width="60px">
+                   <div class="input-box-handles"><input type="text" placeholder="id"></div>
+                   </div>
+                </div>
+          
+                <div class="input_fields_wrap">
+                    <button class="add_field_button"><img src="images/plus.png" width="40px" height="40px"></button>
+                    <div class="input-box"></div>
+                </div>
+
+            </form>
+        </section>
+    </body>
+</html>
