@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+body{
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    font-family: 'Montserrat', sans-serif;
+}
+.navbar {
+    margin: auto;
+    margin-top: 1rem;
+    background-color: #512da8; /* Dark purple with 70% opacity */
+    color: white; /* Text color */
+    padding: 10px 0; /* Padding for navbar */
+    border-radius: 15px; 
+    width: 90%; /* Optional: Set width of the navbar */
+  }
+  
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Optional: Set max width for the container */
+    margin: 0 auto; /* Center align */
+    padding: 0 20px;
+  }
+  
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .logo {
+    width: 40px; /* Adjust size of the logo image */
+    margin-right: 10px; /* Space between logo and text */
+  }
+  
+  .logo-text {
+    font-size: 1.2em;
+    color: white; /* Text color */
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .hidden {
+    color: white;
+    font-size: 14px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    
+    cursor: pointer;
+    background-color: transparent;
+    border-color: #fff;
+  }
+  
+  .btn:hover {
+    background-color: #5c6bc0; /* Darker shade of purple on hover */
+  }
+
+  .Home-container {
+      display: flex;
+      
+      align-items: center;
+      margin: auto;
+      margin-top: 2.1rem;
+    width: 85%;
+    
+  }
+  .Home-container .image_container {
+    position: relative; /* Set position relative for absolute positioning of pseudo-element */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    margin: auto;
+    width: 85%;
+  }
+  
+  .Home-container .image_container::after {
+    content: ''; /* Create a pseudo-element */
+    position: absolute; /* Position absolutely within the container */
+    top: 0; /* Align at the top */
+    right: 0; /* Align at the right */
+    width: 100px; /* Set width of the repeating image area */
+    height: 100px; /* Set height of the repeating image area */
+    background-image: url('../images/icon-no-background.png'); /* Set the background image */
+    background-repeat: repeat; /* Repeat the background image */
+  }
+  
+  .laptop_img {
+    background-color: transparent;
+    width: 30%;
+    height: 250px;
+    position: absolute;
+    right: 0;
+    bottom: 0%;
+  }
+  .laptop_img img {
+    width: 100%;
+    height: 99%;
+    object-fit: cover; /* Cover the container while preserving aspect ratio */
+    object-position: center top;
+    
+    
+  }
+
+
+  
+  
+  
+
+  
+  .Home-content {
+    text-align: center;
+    padding: 50px;
+    background-color: #512da8;
+    color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Home-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .Home-content p {
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  
+  .Home_btn {
+    color: white;
+    font-size: 14px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    
+    cursor: pointer;
+    background-color: transparent;
+    border-color: #fff;
+
+    display: inline-block;
+    position: relative;
+    padding: 12px 40px;
+    
+    text-decoration: none;
+    font-size: 1.1em;
+    
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .Home_btn::before {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .Home_btn:hover {
+    transform: translateX(-10px);
+  }
+  
+  .Home_btn:hover::before {
+    opacity: 1;
+  }
+  
+  .Home_btn:hover::before {
+    opacity: 1;
+  }
+
+  .Home_btn svg{
+    position: relative;
+    z-index: -1;
+
+  }
+  

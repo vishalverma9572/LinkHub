@@ -112,6 +112,7 @@ function Authorise(props) {
   };
 
   return (
+    <div className="body">
     <div className={`container ${isSignUp ? "active" : ""}`}>
       <div className="form-container sign-up">
         <form onSubmit={registerFunction}>
@@ -208,6 +209,7 @@ function Authorise(props) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

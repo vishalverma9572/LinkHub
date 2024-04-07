@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Authorise from './pages/Authorise';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
 
 
 function App() {
@@ -18,8 +19,9 @@ function App() {
     <Routes>
       <Route path="/signup" element={<Authorise up={true} />} />
       <Route path="/signin" element={<Authorise up={false}/>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      
+      <Route path="/" element={<Home />} />
+      
       <Route path="/dashboard" element={<Dashboard 
       logoutfun={logout}
       />} />
