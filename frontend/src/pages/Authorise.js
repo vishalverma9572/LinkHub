@@ -20,8 +20,10 @@ function Authorise(props) {
     // Navigate to the appropriate route when isSignUp changes
     if (isSignUp) {
       navigate("/signup");
+      document.title="SignUp | LinkHub"
     } else {
       navigate("/signin");
+      document.title="SignIn | LinkHub"
     }
     setErrorMsg(null); // Clear error message when isSignUp changes
   }, [isSignUp]); // Re-run effect when isSignUp or history changes

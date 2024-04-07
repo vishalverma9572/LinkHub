@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 body{
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
@@ -93,15 +96,21 @@ body{
     background-color: transparent;
     width: 30%;
     height: 250px;
-    position: absolute;
+    position: fixed;
+    /* position: absolute;
     right: 0;
-    bottom: 0%;
+    bottom: 0%; */
+    
   }
   .laptop_img img {
     width: 100%;
     height: 99%;
     object-fit: cover; /* Cover the container while preserving aspect ratio */
     object-position: center top;
+    position: relative;
+    top: -95%;
+    left: 250%;
+
     
     
   }
@@ -112,10 +121,18 @@ body{
   
 
   
-  .Home-content {
+  /* .Home-content {
     text-align: center;
     padding: 50px;
     background-color: #512da8;
+    color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  } */
+  .Home-content {
+    text-align: center;
+    padding: 50px;
+    background-color: rgba(81, 45, 168, 0.8); /* Dark purple with 80% opacity */
     color: white;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -131,8 +148,11 @@ body{
     font-size: 1.2em;
     line-height: 1.6;
     margin-bottom: 30px;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
   }
-  
   
   .Home_btn {
     color: white;
@@ -143,18 +163,14 @@ body{
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    
     cursor: pointer;
     background-color: transparent;
     border-color: #fff;
-
     display: inline-block;
     position: relative;
     padding: 12px 40px;
-    
     text-decoration: none;
     font-size: 1.1em;
-    
     overflow: hidden;
     transition: transform 0.3s ease;
   }
@@ -177,13 +193,40 @@ body{
     opacity: 1;
   }
   
-  .Home_btn:hover::before {
-    opacity: 1;
+  .Home_btn span{
+    min-width: 120px;
   }
+  
 
   .Home_btn svg{
     position: relative;
     z-index: -1;
 
   }
+
+
+  @media (max-width: 768px) {
+    .navbar{
+      width: 100%;
+      
+    }
+    .Home-container{
+      width: 100%;
+    }
+    .Home-content{
+      z-index: 5;
+      width: 100%;
+    }
+    .laptop_img {
+      display: none;
+    }
+    .Home-container .image_container{
+      display: none;
+    }
+    .image_container img{
+      display: none;
+    }
+  }
+
+  
   
