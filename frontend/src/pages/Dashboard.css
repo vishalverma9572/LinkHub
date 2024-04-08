@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap');
+.dashboard_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3px;
+  perspective: 1500px; /* Adds a 3D space for children */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dashboard_div nav {
+  width: 18%;
+  background-color: #512da8;
+    
+    background: linear-gradient(to right,  #512da8,#5c6bc0);
+  padding: 20px;
+  height: calc(100vh - 6px); /* Adjust for margin */
+  margin-right: 6px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: rotateY(-2deg) translateZ(-4px); /* Tilts the nav for a 3D effect */
+}
+
+.dashboard_nav_logo h1
+ {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.6em;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); Enhances the 3D effect */
+}
+
+.dashboard_div .horizontal_line {
+  width: 60%;
+  height: 1px;
+  background-color: #fff;
+  margin: 20px 0;
+  margin-top: 15px;
+}
+.dashboard_nav_logout button{
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 2px !important;
+  /* position: relative;
+  bottom: 20px; */
+ color: #fff;
+  font-size: 14px !important;
+  padding: 10px 25px !important;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: #fff;
+  display: inline-block;
+  position: relative;
+  padding: 12px 40px;
+  text-decoration: none;
+  font-size: 1.1em;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.dashboard_nav_logout button:hover{
+  background-color: rgba(0, 0, 0, 0.3); 
+  
+  /* color: #512da8; */
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+
+
+.dashboard_nav_logo{
+  display: flex;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.dashboard_div main {
+  flex: 1;
+  padding: 20px;
+  height: calc(100vh - 6px); /* Adjust for margin */
+  border: 1px solid #ddd;
+  margin-top: 3px;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: rotateY(0.5deg) translateZ(0);
+  
+}
+
+/* Add transitions for interactive hover effects */
+.dashboard_div nav,
+.dashboard_div main {
+  transition: transform 0.7s ease, box-shadow 0.3s ease;
+}
+
+.dashboard_div nav:hover{
+  transform: rotateY(0.5deg) translateZ(0); /* Resets the tilt on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhances the shadow on hover */
+}
+.dashboard_div main:hover{
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+              inset 0 0 8px rgba(82, 45, 169, 0.5); /* Inner shadow for depth */
+  transform: rotateY(0.5deg) translateZ(-2px); /* Tilts the main for a 3D effect */
+}
+
+.dashboard_nav_links{
+  height:70%;
+  font-family: "Raleway", sans-serif;
+}
+
+.dashboard_nav_links .dashboard_nav_menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-around; */
+  height: 100%;
+}
+
+.dashboard_nav_links .dashboard_nav_menu a{
+  color: #fff;
+  font-size: 1.2em;
+  text-decoration: none;
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard_nav_links .dashboard_nav_menu a {
+  color: #fff;
+  font-size: 1.15em;
+  width: 100%;
+  text-decoration: none;
+  margin: 8px 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Added transition for transform */
+}
+
+.dashboard_nav_links .dashboard_nav_menu a:hover {
+  background-color: rgba(0, 0, 0, 0.3); /* Transparent black background */
+  transform: translateY(-2px) translateZ(4px); /* 3D effect on hover */
+}
+
+.dashboard_nav_links .dashboard_nav_menu a svg{
+ 
+  margin-right: 10px;
+}
+
+.dashboard_div main{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+.dashboard_container .header .profile_icon {
+  margin-top: 25px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1.2rem;
+  font-style: normal;
+  
+  
+
+  font-size: 1.2rem;
+  font-weight: 600;
+  
+  color: black;
+}
+/* .dashboard_container .header .profile_icon svg{
+  font-size: 40px;
+  color: rgba(82, 45, 168, 0.9);
+  margin-left: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.dashboard_container .header .profile_icon svg:hover{
+  color: rgba(82, 45, 168, 0.95);
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+  
+} */
+/* Custom styling for the link text */
+.dashboard_container .header .profile_icon svg {
+  color: #512da8; /* Set link text color */
+  text-decoration: none; /* Remove default underline */
+  font-weight: bold; /* Set font weight to bold */
+  font-size: 44px; /* Set font size */
+  padding-bottom: 2 px; /* Add padding around the text */
+  border: 1px solid #512da8; /* Add border */
+  border-radius: 23px; /* Add border radius */
+  display: inline-block; /* Display as block element */
+  background-color: #512da8; /* Change background color on hover */
+  color: #fff; /* Change text color on hover */
+  transition: background-color 0.4s ease, color 0.4s ease; /* Add transition effect */
+}
+
+/* Hover effect for the link */
+.dashboard_container .header .profile_icon svg:hover {
+  background-color: #fff; /* Change background color on hover */
+  color: #512da8; 
+}
+
+
+.dashboard_container .dashboard_title{
+  font-family:  "Raleway", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #512da8;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.dashboard_container .create_button {
+  margin-top: 70px;
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 2px !important;
+  /* position: relative;
+  bottom: 20px; */
+  background: linear-gradient(to right,#5c6bc0  ,#512da8);
+  
+  color:#fff;
+  
+  font-size: 14px !important;
+  padding: 10px 25px !important;
+  border: 1px solid #512da8;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  
+  align-items: center;
+  display: inline-block;
+  justify-self: right;
+  right: 20px;
+  padding: 12px 40px;
+  text-decoration: none;
+  font-size: 1.1em;
+  overflow: hidden;
+  
+  transition: transform 0.3s ease;
+}
+
+.dashboard_container .create_button:hover {
+  background: rgba(255, 255, 255, 0.757);
+  border-width: 1.5px;
+  transition: border-width 0.4s ease, background 0.4s ease;
+  color: #512da8;
+  transform: scale(1.01);
+}
+.dashboard_container .div_create_button{
+  display: flex;
+  justify-content: right;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.dashboard_container .create_button:focus {
+  outline: none; /* Remove default focus outline */
+}
+
+.dashboard_container .create_button svg {
+  font-size: 20px; /* Set font size */
+  margin-right: 5px; /* Adjust spacing between icon and text */
+}
+
+.dashboard_container .div_content{
+  background-color: rgba(245, 245, 245, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.dashboard_container .div_content h1{
+  font-family: "Raleway", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #512da8;
+  margin-top: 10px;
+  margin-left: 20px;
+}

@@ -17,8 +17,21 @@ const userSchema = new Schema({
         required: true
     },
     userLinks: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Link' // Reference to the Link collection
+        linkid: {
+            type: String,
+            required: true
+        },
+        views: {
+            type: Number,
+            default: 0
+        },
+        publish: {
+            type: Boolean,
+            default: false
+        },
+        name: {
+            type: String
+        }
     }]
 });
 

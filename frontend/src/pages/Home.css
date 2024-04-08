@@ -10,7 +10,9 @@ body{
 .navbar {
     margin: auto;
     margin-top: 1rem;
-    background-color: #512da8; /* Dark purple with 70% opacity */
+    background-color: #512da8;
+    
+    background: linear-gradient(to right, #5c6bc0, #512da8);
     color: white; /* Text color */
     padding: 10px 0; /* Padding for navbar */
     border-radius: 15px; 
@@ -88,7 +90,8 @@ body{
     right: 0; /* Align at the right */
     width: 100px; /* Set width of the repeating image area */
     height: 100px; /* Set height of the repeating image area */
-    background-image: url('../images/icon-no-background.png'); /* Set the background image */
+    background-image: url('../images/icon-no-background.png');
+     /* Set the background image */
     background-repeat: repeat; /* Repeat the background image */
   }
   
@@ -132,7 +135,9 @@ body{
   .Home-content {
     text-align: center;
     padding: 50px;
-    background-color: rgba(81, 45, 168, 0.8); /* Dark purple with 80% opacity */
+    background-color: #512da8;
+    height: 100%;
+    background: linear-gradient(to right, #5c6bc0, #512da8);
     color: white;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -203,6 +208,7 @@ body{
     z-index: -1;
 
   }
+  
 
 
   @media (max-width: 768px) {

@@ -50,12 +50,16 @@ function Authorise(props) {
       if (data.status === "success") {
         localStorage.setItem("token", data.token);
         // Redirect to /dashboard after successful login
+        setPassword("");
         navigate("/dashboard");
       } else {
+        localStorage.removeItem("token");
+        setPassword("");
         setErrorMsg(data.error);
       }
     } catch (error) {
       console.error("Login error:", error);
+      setErrorMsg("Something went Wrong");
     }
   };
 
@@ -103,6 +107,14 @@ function Authorise(props) {
       const data = await response.json();
       if (data.status === "success") {
         setIsSignUp(false); // Switch to sign-in mode after successful registration
+        setEmail(newEmail);
+        setPassword(newPassword);
+        setNewName("");
+        setNewEmail("");
+        setNewPassword("");
+        setErrorMsg(null);
+
+        loginFunction(e); // Automatically sign in after registration
       } else {
         setErrorMsg(data.error);
       }
