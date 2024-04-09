@@ -6,13 +6,14 @@ import Authorise from './pages/Authorise';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 
 function App() {
   const Navigate = useNavigate();
   function logout() {
     localStorage.removeItem('token');
-    Navigate('/signin')
+    Navigate('/')
   }
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard 
       logoutfun={logout}
       />} />
+      <Route path='/profile' element={<Profile logoutfun={logout}/>} />
     </Routes>
     
       

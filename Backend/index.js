@@ -9,6 +9,7 @@ const db=require('./database/dboperation');
 const user_registration=db.user_registration;
 const user_login=db.user_login;
 const get_user=db.get_user;
+const update_password=db.update_password;
 const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
 mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
@@ -77,6 +78,21 @@ app.get('/dashboard', async (req, res) => {
   res.status(200).json({ status: 'success', user: user });
 
   
+});
+
+app.post('/update-password', async (req, res) => {
+  const email = req.user.email;
+  const { newPassword } = req.body;
+
+  try {
+    // Call the update_password function asynchronously
+    await update_password(email, newPassword);
+    res.status(200).json({ status: 'success', message: 'Password updated successfully' });
+  } catch (error) {
+    // Handle password update errors
+    console.error('Password update error:', error);
+    res.status(400).json({ status: 'failed', error: error.message });
+  }
 });
 
 app.listen(port, () => {

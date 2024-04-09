@@ -106,15 +106,19 @@ function Authorise(props) {
       });
       const data = await response.json();
       if (data.status === "success") {
-        setIsSignUp(false); // Switch to sign-in mode after successful registration
         setEmail(newEmail);
         setPassword(newPassword);
         setNewName("");
         setNewEmail("");
         setNewPassword("");
         setErrorMsg(null);
+        setIsSignUp(false); // Switch to sign-in mode after successful registration
+        
+        
 
-        loginFunction(e); // Automatically sign in after registration
+
+
+        
       } else {
         setErrorMsg(data.error);
       }

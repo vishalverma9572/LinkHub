@@ -1,0 +1,118 @@
+
+   .profile-container h1 {
+    margin-top: 75px !important;
+    margin-bottom: 30px;
+  }
+  
+ .profile-container .profile-details {
+    margin-bottom: 30px;
+  }
+  
+  .profile-container .profile-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-container .icon {
+    margin-right: 10px;
+    color: #512da8;
+    font-size: 1.3rem;
+    
+  }
+  .profile-container .profile-item span {
+    font-size: 1.2rem;
+    font-family: "Raleway", sans-serif;
+    letter-spacing: 1.3px;
+    }
+  
+   .profile-container .label {
+    font-weight: 500;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 15px;
+    
+    
+  }
+  
+ .profile-container .password-change {
+    
+    background-color: rgba(245, 245, 245, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+  }
+  
+   .profile-container .password-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-container .password-change h2{
+    margin-bottom: 20px;
+    font-family:  "Raleway", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #512da8;
+    margin-top: 10px;
+    
+  }
+  .profile-container .password-input input {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .profile-container .password-change .change-password-btn {
+    margin-top: 20px;
+    font-family: "Raleway", sans-serif;
+  letter-spacing: 2px !important;
+  /* position: relative;
+  bottom: 20px; */
+  background: linear-gradient(to right,#5c6bc0  ,#512da8);
+  
+  color:#fff;
+  
+  font-size: 14px !important;
+  padding: 10px 25px !important;
+  border: 1px solid #512da8;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  
+  cursor: pointer;
+  
+  align-items: center;
+  display: inline-block;
+  justify-self: right;
+  right: 20px;
+  padding: 12px 40px;
+  text-decoration: none;
+  font-size: 1.1em;
+  overflow: hidden;
+  
+  transition: transform 0.3s ease;
+  }
+
+.profile-container .password-change .change-password-btn:hover {
+        background: rgba(255, 255, 255, 0.757);
+        border-width: 1.5px;
+        transition: border-width 0.4s ease, background 0.4s ease;
+        color: #512da8;
+        transform: scale(1.01);
+}
+  
+  .profile-container .password-change .error-message {
+    color:#f409d2;
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+  }
+  
+  .profile-container .password-change .success-message {
+    color: green;
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+  }
+   

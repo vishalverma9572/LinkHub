@@ -51,5 +51,21 @@ async function get_user(email) {
     }
 }
 
+async function update_password(email, password) {
+    try {
+        const user = await Model.User.findOne
+        ({ email });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        user.password = password;
 
-module.exports = { user_registration, user_login, get_user };
+        await user.save();
+    }
+    catch (error) {
+        throw error;
+    }
+}
+
+
+module.exports = { user_registration, user_login, get_user, update_password};

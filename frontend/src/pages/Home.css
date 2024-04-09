@@ -82,6 +82,10 @@ body{
     margin: auto;
     width: 85%;
   }
+.Home-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+   
+}
   
   .Home-container .image_container::after {
     content: ''; /* Create a pseudo-element */

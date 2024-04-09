@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import logo from "../images/linkhub-high-resolution-logo-transparent.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faPlus,faUserCircle  } from "@fortawesome/free-solid-svg-icons";
-import Linkcard from "../components/Linkcard";
+import Nav from "../components/Nav";
+import CardList from "../components/CardsList";
 
 export default function Dashboard(props) {
   const [data, setData] = React.useState(null);
@@ -41,43 +42,16 @@ export default function Dashboard(props) {
   };
   return (
     <div className="dashboard_div">
-      <nav className="dashboard_nav">
-        <div className="dashboard_nav_logo">
-          <img src={logo} alt="logo" className="logo" />
-          <h1>LinkHub</h1>
-          {/* horizontal line  */}
-        </div>
-        <hr className="horizontal_line"></hr>
-        <div className="dashboard_nav_links">
-          <div className="dashboard_nav_menu">
-            <Link to="/dashboard" className="nav_link">
-              <FontAwesomeIcon icon={faHome} />
-              <span>Dashboard</span>
-            </Link>
-            <Link to="/profile" className="nav_link">
-              <FontAwesomeIcon icon={faUser} />
-              <span>Profile</span>
-            </Link>
-            <Link to="/create" className="nav_link">
-              <FontAwesomeIcon icon={faPlus} />
-              <span>Create</span>
-            </Link>
-          </div>
-        </div>
-        <div className="dashboard_nav_logout">
-          <button className="btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+      <Nav logoutfun={props.logoutfun}/>
+      
       <main className="dashboard_container">
         <div className="header">
           {/* Profile icon */}
           <div className="profile_icon">
             {/* Replace 'profile_icon_url' with the URL of your profile icon image */}
-            <span>Hello! {
+            {/* <span>Hello! {
               data && data.user.name.trim().split(" ")[0].toUpperCase()
-              }</span>
+              }</span> */}
             <Link to="/profile"  >
             <FontAwesomeIcon icon={faUserCircle} />
             </Link>
@@ -101,7 +75,7 @@ export default function Dashboard(props) {
         {/* Your Links text */}
         <div className="div_content">
           <h1>Your Links </h1>
-          <Linkcard data={data} />
+          <CardList/>
         </div> 
         
       </main>

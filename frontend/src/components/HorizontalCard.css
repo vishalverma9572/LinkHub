@@ -1,0 +1,105 @@
+.horizontal-card {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-radius: 25px;
+  }
+  .horizontal-card:hover{
+    transform: translateY(-2px) translateZ(4px); /* 3D effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   
+    transition: all 0.3s ease;
+  }
+  
+  .horizontal-card .card-content {
+    display: flex;
+    align-items: center;
+    width: 95%;
+  }
+  
+  .horizontal-card .icon {
+    margin-right: 25px;
+    font-size: 24px;
+    color: #512da8;
+  }
+  
+  .horizontal-card .link-details {
+    flex: 1;
+  }
+  
+  .horizontal-card .link-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .horizontal-card .views {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #2f2929;
+  }
+  
+  .horizontal-card .eye-icon {
+    margin-right: 5px;
+    color: #512da8;
+  }
+  
+  .horizontal-card .menu {
+    cursor: pointer;
+    font-size: 24px;
+    color: #512da8;
+  }
+  
+  .horizontal-card .dropdown-content {
+    position: absolute;
+   right: 20px;
+    background: linear-gradient(to right,rgba(92, 107, 192, 0.98)  ,rgba(82, 45, 168, 0.98));
+    width: 150px;
+    color:#fff;
+   
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    display: none;
+    
+  }
+  
+  .horizontal-card .menu:hover .dropdown-content {
+    display: block;
+    
+  }
+  
+  .horizontal-card .dropdown-content button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px 20px;
+    text-align: left;
+    border: none;
+    color:#fff;
+    background-color: transparent;
+    cursor: pointer;
+    font-size:16px;
+    font-family: 'Raleway', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease ,border 0.3 ease; /* Added transition for transform */
+    text-decoration: none;
+  }
+  
+  
+  .horizontal-card .dropdown-content button:hover {
+    background-color: #f9f9f9;
+    color: #2f2929;
+    border: 1px solid #512da8;
+    transform: translateY(-2px) translateZ(4px); /* 3D effect on hover */
+    border-radius: 20px;
+  }
+  
+  

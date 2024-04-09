@@ -4,16 +4,24 @@
 .dashboard_div {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: right;
   margin: 3px;
   perspective: 1500px; /* Adds a 3D space for children */
   font-family: 'Montserrat', sans-serif;
+  scrollbar-width: none;
+  
+ 
 }
+.dashboard_div::-webkit-scrollbar{
+  display: none;
+}
+/* .dashboard_div::-webkit-scrollbar{
+  wid */
 
 .dashboard_div nav {
   width: 18%;
   background-color: #512da8;
-    
+  
     background: linear-gradient(to right,  #512da8,#5c6bc0);
   padding: 20px;
   height: calc(100vh - 6px); /* Adjust for margin */
@@ -25,6 +33,10 @@
   /* justify-content: space-between; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: rotateY(-2deg) translateZ(-4px); /* Tilts the nav for a 3D effect */
+  transition: transform 0.7s ease, box-shadow 0.3s ease;
+  position: sticky;
+  top: 3px;
+  z-index: 1000;
 }
 
 .dashboard_nav_logo h1
@@ -84,14 +96,15 @@
 }
 
 .dashboard_div main {
-  flex: 1;
+  width: 81.6%;
   padding: 20px;
-  height: calc(100vh - 6px); /* Adjust for margin */
+  min-height: calc(100vh - 6px); /* Adjust for margin */
   border: 1px solid #ddd;
   margin-top: 3px;
   border-radius: 30px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: rotateY(0.5deg) translateZ(0);
+  padding-bottom: 200px;
   
 }
 
@@ -292,4 +305,5 @@
   color: #512da8;
   margin-top: 10px;
   margin-left: 20px;
+  margin-bottom: 30px;
 }
