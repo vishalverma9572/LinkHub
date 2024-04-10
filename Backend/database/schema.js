@@ -20,19 +20,24 @@ const userSchema = new Schema({
         linkid: {
             type: String,
             required: true
-        },
-        views: {
+          },
+          views: {
             type: Number,
             default: 0
-        },
-        publish: {
+          },
+          published: {
             type: Boolean,
             default: false
-        },
-        name: {
+          },
+          name: {
             type: String
-        }
+          },
+          lastupdated: {
+            type: Date,
+            default: Date.now // Set default value to current date/time
+          }
     }]
+    
 });
 
 // Define the Link schema

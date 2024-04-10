@@ -16,7 +16,7 @@ function Home() {
     // Simulate typing effect after a delay
     const typingTimeout = setTimeout(() => {
       setShowText(true);
-    }, 1000);
+    }, 500);
 
     // Trigger border animation after typing animation completes
     const borderTimeout = setTimeout(() => {

@@ -1,18 +1,29 @@
 import React from 'react';
 import HorizontalCard from './HorizontalCard';
 
-const CardList = () => {
-  const cards = [
-    { id: 1, linkName: 'Example Link 1', views: 100,published: false},
-    { id: 2, linkName: 'Example Link 2', views: 150,published: true},
-    { id: 3, linkName: 'Example Link 3', views: 80,published: false},
-  ];
+const CardList = (props) => {
+  const { userLinks, searchQuery } = props;
+
+  // Filter the cards based on the search query
+  const filteredCards =userLinks && userLinks.filter((card) =>
+    card.linkName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div>
-      {cards.map((card) => (
-        <HorizontalCard key={card.id} linkName={card.linkName} views={card.views} publish={card.published} />
+      {filteredCards && filteredCards.map((card) => (
+        <HorizontalCard
+          key={card.linkid}
+          linkName={card.linkName}
+          linkid={card.linkid}
+          views={card.views}
+          publish={card.published}
+          lastupdated={card.lastupdated}
+        />
       ))}
+      {filteredCards && filteredCards.length === 0 && (
+        <div className="no-links">No links found</div>
+      )}
     </div>
   );
 };

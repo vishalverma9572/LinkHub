@@ -1,18 +1,142 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HorizontalCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink, faEye, faEllipsisH, faShare, faEdit, faTrash, faWifi, faWifiSlash } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faEye, faEllipsisH, faShare, faEdit, faTrash, faWifi,faUnlink } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 
-const HorizontalCard = ({ linkName, views,publish, }) => {
+const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
+  const navigate = useNavigate();
+  const reftreshLinks = () => {
+    window.location.reload();
+  };
+
+  const formattedDate = new Date(lastupdated).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+  
+  const url = `/view/${linkid}`;
+
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
   const handleMenuClick = () => {
-    // Handle click event for menu options (view, share, edit, delete, publish)
-    // Implement your logic here
     console.log('Menu clicked');
+  };
+
+  const handleDelete = () => {
+    
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    console.log(`Deleting link '${linkName}'...`);
+    setIsDeleteDialogOpen(false);
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${localStorage.getItem('token')}`,
+      },
+    };
+    fetch(`http://localhost:4500/delete-link/${linkid}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === 'success') {
+          console.log(`Link '${linkName}' deleted successfully`);
+          // Update the UI to remove the card
+          reftreshLinks();
+
+        } else {
+          console.error(`Failed to delete link '${linkName}'`);
+        }
+      });
+
+  };
+
+  const handlepublish = () => {
+    console.log(`Publishing link '${linkName}'...`);
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${localStorage.getItem('token')}`,
+      },
+    };
+    fetch(`http://localhost:4500/publish-link/${linkid}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === 'success') {
+          console.log(`Link '${linkName}' published successfully`);
+          // Update the UI to show the published status
+          reftreshLinks();
+        } else {
+          console.error(`Failed to publish link '${linkName}'`);
+        }
+      });
+  };
+
+  const handleunpublish = () => {
+    console.log(`Unpublishing link '${linkName}'...`);
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${localStorage.getItem('token')}`,
+      },
+    };
+    fetch(`http://localhost:4500/unpublish-link/${linkid}`, requestOptions)
+
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === 'success') {
+          console.log(`Link '${linkName}' unpublished successfully`);
+          // Update the UI to show the unpublished status
+          reftreshLinks();
+        } else {
+          console.error(`Failed to unpublish link '${linkName}'`);
+        }
+      });
+  };
+
+
+  const handleView = () => {
+    navigate(`/view/${linkid}`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/edit/${linkid}`);
+  };
+
+  const handleShareClick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url: url,
+        });
+        console.log('Link shared successfully');
+      } catch (error) {
+        console.error('Error sharing link:', error);
+      }
+    } else {
+      console.log('Web Share API not supported');
+    }
   };
 
   return (
     <div className="horizontal-card">
+      {isDeleteDialogOpen && (
+        <div className="delete-dialog">
+          <p>Are you sure you want to delete '{linkName}' link?</p>
+          <button onClick={confirmDelete} className='confirm'>Delete</button>
+          <button onClick={() => setIsDeleteDialogOpen(false)}>Cancel</button>
+        </div>
+      )}
       <div className="card-content">
         <div className="icon">
           <FontAwesomeIcon icon={faLink} />
@@ -24,16 +148,32 @@ const HorizontalCard = ({ linkName, views,publish, }) => {
             <span>{views} views</span>
           </div>
         </div>
+        <div className="lastupdated">
+          Last updated on {formattedDate}
+        </div>
         <div className="menu">
           <FontAwesomeIcon icon={faEllipsisH} onClick={handleMenuClick} />
-          {/* Dropdown menu options */}
           <div className="dropdown-content">
-            <button><FontAwesomeIcon icon={faEye} /> View</button>
-            <button><FontAwesomeIcon icon={faShare} /> Share</button>
-            <button><FontAwesomeIcon icon={faEdit} /> Edit</button>
-            <button><FontAwesomeIcon icon={faTrash} /> Delete</button>
-            {publish ? <button> Unpublish</button> : 
-            <button><FontAwesomeIcon icon={faWifi} /> Publish</button>}
+            <button onClick={handleView}>
+              <FontAwesomeIcon icon={faEye} /> View
+            </button>
+            <button onClick={handleShareClick}>
+              <FontAwesomeIcon icon={faShare} /> Share
+            </button>
+            <button onClick={handleEdit}>
+              <FontAwesomeIcon icon={faEdit} /> Edit
+            </button>
+            {publish ? (
+              <button onClick={handleunpublish}>
+                <FontAwesomeIcon icon={faUnlink} /> Unpublish</button>
+            ) : (
+              <button onClick={handlepublish}>
+                <FontAwesomeIcon icon={faWifi} /> Publish
+              </button>
+            )}
+            <button onClick={handleDelete}>
+              <FontAwesomeIcon icon={faTrash} /> Delete
+            </button>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import CardList from "../components/CardsList";
 
 export default function Dashboard(props) {
   const [data, setData] = React.useState(null);
+  const [searchQuery, setSearchQuery] = React.useState("");
   useEffect(() => {
     document.title = "Dashboard | LinkHub";
     async function fetchData() {
@@ -37,9 +38,7 @@ export default function Dashboard(props) {
     fetchData(); // Call the fetchData function when the component mounts
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
-  const handleLogout = () => {
-    props.logoutfun();
-  };
+  
   return (
     <div className="dashboard_div">
       <Nav logoutfun={props.logoutfun}/>
@@ -74,11 +73,23 @@ export default function Dashboard(props) {
         
         {/* Your Links text */}
         <div className="div_content">
+          <form className="search-form">
           <h1>Your Links </h1>
-          <CardList/>
+          <input
+            type="text"
+            placeholder="Search Links"
+            className="search-bar"
+
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          </form>
+          
+          <CardList userLinks={data && data.user.userLinks} searchQuery={searchQuery}/>
         </div> 
         
       </main>
     </div>
   );
 }
+
+

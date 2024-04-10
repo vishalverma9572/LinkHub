@@ -67,5 +67,70 @@ async function update_password(email, password) {
     }
 }
 
+async function deleteLink(email, linkId) {
+    try {
+        // Find the user by email
+        const user = await Model.User.findOne({ email });
+        if (!user) {
+            throw new Error('User not found');
+        }
 
-module.exports = { user_registration, user_login, get_user, update_password};
+        // Check if the linkId exists in user's userLinks array
+        const linkIndex = user.userLinks.findIndex(link => link.linkid === linkId);
+        if (linkIndex === -1) {
+            throw new Error('Link not found for this user');
+        }
+
+        // Remove the link from the user's userLinks array
+        user.userLinks.splice(linkIndex, 1);
+
+        // Save the updated user object (with the link removed)
+        await user.save();
+
+        // Optionally, you might want to delete the link document from the Links collection
+        // Here's how you would do it if linkId corresponds to a Link document
+        // This part assumes you have the Link model imported and defined correctly
+
+        await Model.Link.deleteOne({ linkid: linkId }); // If linkId is the ObjectId of the Link document
+
+        // If linkId is a property on the userLinks, it's typically not an ObjectId and this
+        // would result in an error. You need to know the shape of your data and use the
+        // right property for this.
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function publish(email, linkId,Bool) {
+    try {
+        // Find the user by email
+        const user = await Model.User.findOne({ email });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        // Check if the linkId exists in user's userLinks array
+        const linkIndex = user.userLinks.findIndex(link => link.linkid === linkId);
+        if (linkIndex === -1) {
+            throw new Error('Link not found for this user');
+        }
+        user.userLinks[linkIndex].published = Bool;
+
+        // Save the updated user object (with the link removed)
+        await user.save();
+        
+        //update the link document
+        await   Model.Link.findOneAndUpdate({ linkid: linkId }, { published: Bool });
+    }
+    catch (error) {
+        throw error;
+    }
+}
+
+
+
+
+
+
+
+module.exports = { user_registration, user_login, get_user, update_password, deleteLink,publish};

@@ -305,5 +305,54 @@
   color: #512da8;
   margin-top: 10px;
   margin-left: 20px;
-  margin-bottom: 30px;
+  
+}
+
+.dashboard_container .div_content form {
+  display: flex;
+  
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.dashboard_container .div_content .search-bar {
+  width: 250px;
+  height: 35px;
+  padding: 8px 15px;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid #522da8e0;
+  border-radius: 20px;
+  outline: none;
+  transition: all 0.3s ease;
+  margin-right: 30px;
+  margin-top: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color:black
+}
+
+.dashboard_container .div_content .search-bar::placeholder {
+  color: #2d2a45; /* Placeholder text color */
+}
+
+.dashboard_container .div_content .search-bar:focus {
+  border-color: #7c4dff; /* Border color on focus */
+}
+
+.dashboard_container .div_content .search-bar:hover {
+  transform: translateY(-2px);
+}
+
+.dashboard_container .div_content .search-bar:focus-visible {
+  box-shadow: 0 0 0 1px rgba(124, 77, 255, 0.3); /* Focus indicator */
+}
+.dashboard_container .div_content .no-links{
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f409d2;
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: center;
 }

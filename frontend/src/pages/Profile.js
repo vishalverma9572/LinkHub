@@ -67,7 +67,7 @@ const ProfilePage = (props) => {
       // Logic to handle password change (e.g., call backend API)
       // Simulating a success message (replace with actual API call)
       const data = fetch('http://localhost:4500/update-password', {
-        method: 'POST', 
+        method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',
            Authorization: `${localStorage.getItem("token")}`, // Include Bearer token
