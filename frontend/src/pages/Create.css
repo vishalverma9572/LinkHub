@@ -253,7 +253,7 @@
 }
 .Create_page .Create_container .bio-input-box label + * {
   margin-top: 30px;
-  display: none;
+  /* display: none; */
 }
 
 

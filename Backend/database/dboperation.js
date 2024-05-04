@@ -238,10 +238,48 @@ async function updateLink(email, data1) {
     }
 }
 
+//view link for public use
+async function viewLink(linkId) {
+    try {
+
+        const link = await Model.Link
+            .findOne({ linkid: linkId })
+            .select('-__id -__v')
+            .exec();
+        if (!link) {
+            throw new Error('Link not found');
+            
+        }
+        if (link.published === false) {
+            throw new Error('Link not published');
+        }
+        // Increment the views count for the link
+        
+        
+        //increment the views count for the userLink
+        const user = await Model.User.findOne({ "userLinks.linkid": linkId });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const userLink = user.userLinks.find(link => link.linkid === linkId);
+        
+        viewcount=Math.max(link.views+1,userLink.views+1);
+        link.views = viewcount;
+        userLink.views = viewcount;
+        await link.save();
+        await user.save();
+        return link;
+    }
+    catch (error) {
+        throw error;
+    }
+}
 
 
 
 
 
 
-module.exports = { user_registration, user_login, get_user, update_password, deleteLink,publish,postnewLink,updateLink,getLink};
+
+
+module.exports = { user_registration, user_login, get_user, update_password, deleteLink,publish,postnewLink,updateLink,getLink,viewLink};

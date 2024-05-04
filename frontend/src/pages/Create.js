@@ -17,8 +17,10 @@ import Text from "./Text";
 import question from "../images/question_mark.png";
 import tick from "../images/tickmark.png";
 import { FaPencil, FaEnvelope, FaPhone } from "react-icons/fa6";
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import axios from "axios";
 import uniqid from "uniqid";
 
@@ -26,6 +28,24 @@ export default function () {
 
   const [existednames, setExistednames] = React.useState(null);
   const [alreadyExists, setAlreadyExists] = React.useState(false);
+  const [quillvalue, setQuillValue] = useState("");
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+  ];
+
   
   useEffect(() => {
     document.title = "Create | LinkHub";
@@ -97,6 +117,7 @@ export default function () {
       alert("Form data submitted successfully");
       let tosaveformdata= {...formData,
         linkid: uuid,
+        bioHtml: quillvalue,
         hyperlinks: urls.map((url, i) => ({
           name: names[i] || `Link ${i + 1}`,
           url: url,
@@ -127,7 +148,16 @@ export default function () {
       }
     } catch (error) {
       console.error("Error submitting form data:", error);
-      alert("Error submitting form data");
+      //
+      let message="Error submitting form data";
+      //setting message for payload large
+        if(error.message.includes("413")){
+            alert("Payload too large");
+        }
+        else{
+          alert(`${message}`);
+        }
+        
     }
   };
 
@@ -172,31 +202,7 @@ export default function () {
   
 
 
-  const quillRef = useRef(null);
-  useEffect(() => {
-    const quill = new Quill(quillRef.current, {
-      theme: "snow",
-      modules: {
-        toolbar: [
-          ["bold", "italic", "underline", "strike"],
-          [{ header: 1 }, { header: 2 }],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["link", "image"],
-          [{ color: [] }, { background: [] }],
-        ],
-      },
-      placeholder: "Enter your bio here...",
-    });
 
-    // Optionally, add event listeners or other configurations here
-
-    // Cleanup function (optional)
-    return () => {
-      // Perform any cleanup or teardown tasks if necessary
-    };
-  }, []); // Empty dependency array ensures this effect runs only once
-
-  let quillrendercount = 1;
 
   const [val, setVal] = useState([]);
   const handleAdd = () => {
@@ -294,7 +300,7 @@ export default function () {
     return () => clearInterval(typingInterval);
   }, [charIndex, wordIndex, words]);
 
-
+  
 
   return (
     <div className="Create_page">
@@ -380,11 +386,18 @@ export default function () {
               <div className="bio-input-box">
                 <label>Bio</label>
                 {/* <textarea placeholder="Enter your bio"></textarea> */}
-                {quillrendercount-- && (
+               
                   
-                    <div ref={quillRef} style={{ minHeight: 100 }} />
+                    
+                <ReactQuill
+                  theme="snow"
+                  value={quillvalue}
+                  onChange={setQuillValue} // Corrected placement of onChange
+                  modules={modules}
+                  formats={formats}
+                />
                   
-                )}
+             
               </div>
               <div className="socials_links">
                 <h2>Social Handles</h2>

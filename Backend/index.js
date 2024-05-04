@@ -15,6 +15,7 @@ const publishLink=db.publish;
 const createLink=db.postnewLink;
 const updateLink=db.updateLink;
 const getLink=db.getLink;
+const viewLink=db.viewLink;
 const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
 mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
@@ -30,6 +31,23 @@ app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World!');
+});
+
+app.get('/view-link/:linkId', async (req, res) => {
+  const linkId = req.params.linkId;
+  console.log(linkId);
+
+  try {
+    // Call the viewLink function asynchronously
+    const link = await viewLink(linkId);
+    console.log('Link fetched successfully');
+    res.status(200).json({ status: 'success', content: link });
+
+  } catch (error) {
+    // Handle link deletion errors
+    console.error('Link deletion error:', error);
+    res.status(400).json({ status: 'failed', error: error.message });
+  }
 });
 
 app.post('/register', async (req, res) => {

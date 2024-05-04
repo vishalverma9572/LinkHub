@@ -1,9 +1,12 @@
- .logo {
+create_logo_icon_div .logo {
     /* display: none; */
+    display: block;
+    position: fixed;
   transform: scale(0.3);
   position: fixed;
   top: -200px; /* Start the logo off-screen */
-  right: 56.0%;
+  right: 60.0%;
+  z-index: 555;
   animation: bounce 1s ease-in-out 2.3s forwards, rotate 2s ease 0s forwards, swing 5s ease-in-out 2.6s forwards,swing2 5s ease-in-out 7.1s forwards,swing3 5s ease-in-out 11.8s forwards,swing4 5s ease-in-out 16.7 forwards; /* Start the swing animation after the previous animations */
 }
 
@@ -74,4 +77,4 @@
   100% {
       transform: scale(0.3) rotate(-80deg); /* Swing back to the original position */
   }
-} */
+} 

@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Edit from './pages/Edit';
+import NotFound404 from './pages/NotFound404';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       <Route path='/profile' element={<Profile logoutfun={logout}/>} />
       <Route path="/create" element={<Create />} />
       <Route path="/edit/:linkid" element={<Edit/>} />
-      <Route path="*" element={<h1>404 Not Found</h1>} />
+      <Route path="*" element={<NotFound404/>} />
     </Routes>
     
       

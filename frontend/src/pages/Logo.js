@@ -3,7 +3,7 @@ import linkd from '../images/link.png'
 import './Logo.css'
 const Logo = () => {
   return (
-    <div className="logo">
+    <div className="create_logo_icon_div">
       <img src={linkd} alt="Logo" />
     </div>
   );

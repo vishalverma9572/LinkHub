@@ -47,7 +47,7 @@ const linkSchema = new Schema({
       required: true,
       unique: true
   },
-  view: {
+  views: {
       type: Number,
       default: 0
   },

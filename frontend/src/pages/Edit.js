@@ -17,18 +17,18 @@ import Text from "./Text";
 import question from "../images/question_mark.png";
 import tick from "../images/tickmark.png";
 import { FaPencil, FaEnvelope, FaPhone } from "react-icons/fa6";
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import uniqid from "uniqid";
 
 export default function () {
-
   const [existednames, setExistednames] = React.useState(null);
   const [alreadyExists, setAlreadyExists] = React.useState(false);
+  const [quillvalue, setQuillValue] = React.useState("");
   const [formData, setFormData] = useState({
-    linkid: '',
-    published:false,
+    linkid: "",
+    published: false,
     name: "",
     email: "",
     phoneNumber: "",
@@ -41,9 +41,60 @@ export default function () {
     profileImage: "",
   });
 
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      [{ 'color': [] }],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "color",
+  ];
+
+  //repce img in image area whenever profileimage changes{formData.profileImage}
+  useEffect(() => {
+    const imgArea = document.querySelector(".img-area");
+    const allImg = imgArea.querySelectorAll("img");
+    allImg.forEach((item) => item.remove());
+    const img = document.createElement("img");
+    img.src = formData.profileImage;
+    imgArea.appendChild(img);
+    imgArea.classList.add("active");
+  }, [formData.profileImage]);
+
+  // Example transformation functions
+  function transformName(originalName) {
+    // Example transformation logic (e.g., converting to uppercase)
+    return originalName.toUpperCase();
+  }
+
+  function transformUrl(originalUrl) {
+    return `${originalUrl}`;
+  }
+
   useEffect(() => {
     document.title = "Edit | LinkHub";
-
 
     async function fetchData() {
       // Fetch data from the backend endpoint with Authorization header
@@ -57,9 +108,9 @@ export default function () {
 
       // Parse the JSON response
       const data = await response.json();
-      console.log(data.user.userLinks.map(link => link.name));
+      console.log(data.user.userLinks.map((link) => link.name));
       // setData(data);
-      setExistednames(data.user.userLinks.map(link => link.name))
+      setExistednames(data.user.userLinks.map((link) => link.name));
       if (data.status === "failed") {
         // Redirect to login if token is invalid or expired
         window.location.href = "/signin";
@@ -71,53 +122,86 @@ export default function () {
     }
     fetchData(); // Call the fetchData function when the component mounts
 
-
     //reading linkid from the url
     const linkid = window.location.pathname.split("/").pop();
-    console.log("linkid is",linkid);
+    console.log("linkid is", linkid);
 
-    if(linkid){
-        //fetch the data of the linkid and set the formdata
-        async function fetchLinkData() {
-            // Fetch data from the backend endpoint with Authorization header
-            const response = await fetch(`http://localhost:4500/get-link/${linkid}`, {
+    if (linkid) {
+      //fetch the data of the linkid and set the formdata
+      async function fetchLinkData() {
+        // Fetch data from the backend endpoint with Authorization header
+        const response = await fetch(
+          `http://localhost:4500/get-link/${linkid}`,
+          {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `${localStorage.getItem("token")}`, // Include Bearer token
+              "Content-Type": "application/json",
+              Authorization: `${localStorage.getItem("token")}`, // Include Bearer token
             },
-            });
-    
-            // Parse the JSON response
-            const data = await response.json();
-            console.log(typeof data.content);
-            // setData(data);
-            if (data.status === "failed") {
-            // Redirect to login if token is invalid or expired
-            window.location.href = "/dashboard";
-            }
-            // Handle the fetched data here (e.g., update state)
-            setFormData(data.content);
-            setExistednames((prev) => prev.filter((name) => name !== data.content.name));
+          }
+        );
+
+        // Parse the JSON response
+        const data = await response.json();
+        console.log(typeof data.content);
+        // setData(data);
+        if (data.status === "failed") {
+          // Redirect to login if token is invalid or expired
+          window.location.href = "/dashboard";
         }
-        fetchLinkData();
-    }
-    else{
-        window.location.href = "/dashboard";
-    }
+        // Handle the fetched data here (e.g., update state)
+        setFormData(data.content);
+        setExistednames((prev) =>
+          prev.filter((name) => name !== data.content.name)
+        );
 
+        let hyperlinks = data.content.hyperlinks;
+        // Transform the hyperlinks array
+        const newNames = [];
+        const newUrls = [];
+        const newFavicons = [];
+        const transformedHyperlinks = hyperlinks.map((link) => {
+          // Perform transformations on each hyperlink object
+          const newName = transformName(link.name); // Example: Transform the name
+          const newUrl = transformUrl(link.url); // Example: Transform the URL
+          const newFavicon = newUrl
+            ? `https://www.google.com/s2/favicons?sz=64&domain=${newUrl}`
+            : "";
 
+          // Store transformed values in corresponding arrays
+          newNames.push(newName);
+          newUrls.push(newUrl);
+          newFavicons.push(newFavicon);
+
+          // Return a new object with original properties and transformed values
+          return {
+            originalName: link.name, // Store original name if needed
+            originalUrl: link.url, // Store original URL if needed
+            newName, // Store transformed name
+            newUrl, // Store transformed URL
+            newFavicons,
+          };
+        });
+        setNames(newNames);
+        setUrls(newUrls);
+        setFavicons(newFavicons);
+        setQuillValue(data.content.bioHtml);
+      }
+      fetchLinkData();
+    } else {
+      window.location.href = "/dashboard";
+    }
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
   const [urls, setUrls] = useState([]);
   const [favicons, setFavicons] = useState([]);
   const uuid = uniqid();
-  
+
   useEffect(() => {
-    if(existednames){
-      if(existednames.includes(formData.name)){
+    if (existednames) {
+      if (existednames.includes(formData.name)) {
         setAlreadyExists(true);
-      }else{
+      } else {
         setAlreadyExists(false);
       }
     }
@@ -125,28 +209,25 @@ export default function () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      
       // Send form data to server using Axios
       // await axios.post("/api/formdata", formData);
-      if(alreadyExists){
+      if (alreadyExists) {
         alert("Alias of this name already exists");
         return;
       }
-      alert("Form data submitted successfully");
-      let tosaveformdata= {...formData,
-        
+      alert(" submitting Form data...");
+      let tosaveformdata = {
+        ...formData,
+
         hyperlinks: urls.map((url, i) => ({
           name: names[i] || `Link ${i + 1}`,
           url: url,
-        }))
-      
+        })),
       };
-      let x=JSON.stringify(tosaveformdata);
-      console.log(
-        "datatype of x is",
-        x);
+      let x = JSON.stringify(tosaveformdata);
+      console.log("datatype of x is", x);
       const response = await fetch("http://localhost:4500/update-link", {
         method: "PUT",
         headers: {
@@ -156,17 +237,23 @@ export default function () {
         body: JSON.stringify(tosaveformdata),
       });
       const data = await response.json();
-      
+
       if (data.status === "failed") {
-        // Redirect to login if token is invalid or expired
-       
-        // window.location.href = "/signin";
+        //
+        let message = "Error submitting form data";
+        //setting message for payload large
+        if (data.message.includes("413")) {
+          alert("Payload too large");
+        } else {
+          alert(`${message}`);
+        }
       }
       if (data.status === "success") {
-        window.location.href = '/dashboard';
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error("Error submitting form data:", error);
+      //
       alert("Error submitting form data");
     }
   };
@@ -174,7 +261,6 @@ export default function () {
   const handleVariation = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
   };
 
   const [names, setNames] = useState([]);
@@ -209,34 +295,6 @@ export default function () {
     const inputFile = document.querySelector("#file");
     inputFile.click();
   };
-  
-
-
-  const quillRef = useRef(null);
-  useEffect(() => {
-    const quill = new Quill(quillRef.current, {
-      theme: "snow",
-      modules: {
-        toolbar: [
-          ["bold", "italic", "underline", "strike"],
-          [{ header: 1 }, { header: 2 }],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["link", "image"],
-          [{ color: [] }, { background: [] }],
-        ],
-      },
-      placeholder: "Enter your bio here...",
-    });
-
-    // Optionally, add event listeners or other configurations here
-
-    // Cleanup function (optional)
-    return () => {
-      // Perform any cleanup or teardown tasks if necessary
-    };
-  }, []); // Empty dependency array ensures this effect runs only once
-
-  let quillrendercount = 1;
 
   const [val, setVal] = useState([]);
   const handleAdd = () => {
@@ -257,8 +315,6 @@ export default function () {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-
-  
 
   const handleFileChange = (event) => {
     const inputFile = event.target;
@@ -291,11 +347,8 @@ export default function () {
 
   const handlepreview = () => {
     //stringify the formdata and send it to the preview page without sending linkid
-    window.open("/preview/?formdata="+JSON.stringify(formData)) ;
-  }
-  
-
-
+    window.open("/preview/?formdata=" + JSON.stringify(formData));
+  };
 
   const [charIndex, setCharIndex] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
@@ -334,34 +387,31 @@ export default function () {
     return () => clearInterval(typingInterval);
   }, [charIndex, wordIndex, words]);
 
-
-
   return (
     <div className="Create_page">
       <div className="Side_container">
         <h1>
-          <span>Create</span> <br></br>{" "}
+          <span>Edit</span> <br></br>{" "}
           <span className="stop-blinking">{dynamicText}</span>.
         </h1>
         <div className="button_container">
-          
           <button onClick={handlepreview}>Preview</button>
-
-          
         </div>
       </div>
       <div className="Create_container">
         <form onSubmit={handleSubmit} className="form">
-          
-
           <button type="submit" className="create_submit">
             Submit
           </button>
           <div>
-            
-            
             <div className="img-area">
-              <input type="file" id="file" onChange={handleFileChange} accept="image/*" hidden />
+              <input
+                type="file"
+                id="file"
+                onChange={handleFileChange}
+                accept="image/*"
+                hidden
+              />
               <img
                 src={profileIcon}
                 width="100px"
@@ -389,7 +439,11 @@ export default function () {
                   autoComplete="off"
                   required
                 />
-                {alreadyExists && (<p style={{color: "#f409d2"}}>* Alias of this name already exists... *</p>)}
+                {alreadyExists && (
+                  <p style={{ color: "#f409d2" }}>
+                    * Alias of this name already exists... *
+                  </p>
+                )}
               </div>
               <div className="row">
                 <div className="input-box">
@@ -420,11 +474,13 @@ export default function () {
               <div className="bio-input-box">
                 <label>Bio</label>
                 {/* <textarea placeholder="Enter your bio"></textarea> */}
-                {quillrendercount-- && (
-                  
-                    <div ref={quillRef} style={{ minHeight: 100 }} />
-                  
-                )}
+                <ReactQuill
+                  theme="snow"
+                  value={quillvalue}
+                  onChange={setQuillValue} // Corrected placement of onChange
+                  modules={modules}
+                  formats={formats}
+                />
               </div>
               <div className="socials_links">
                 <h2>Social Handles</h2>
@@ -494,47 +550,44 @@ export default function () {
             </div>
           </div>
           <div className="morelinks">
-          <button type="button" onClick={handleAdd} className="addbutton">
-          
-            <img src={add} width="30px" height={"30px"}></img>
-          </button>
-          {urls.map((url, index) => (
-            <div className="input-box2" key={index}>
-              <img
-                src={favicons[index] || question}
-                alt={github}
-                style={{ width: "40px", height: "40px" }}
-                className="addsocialsicon"
-                id="icon"
-              />
-              <input
-                type="url"
-                placeholder="Enter a URL"
-                value={url}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="text"
-                placeholder="Name"
-                value={names[index] || ""}
-                onChange={(e) => {
-                  const newNames = [...names];
-                  newNames[index] = e.target.value;
-                  setNames(newNames);
-                }}
-              />
+            <button type="button" onClick={handleAdd} className="addbutton">
+              <img src={add} width="30px" height={"30px"}></img>
+            </button>
+            {urls.map((url, index) => (
+              <div className="input-box2" key={index}>
+                <img
+                  src={favicons[index] || question}
+                  alt={github}
+                  style={{ width: "40px", height: "40px" }}
+                  className="addsocialsicon"
+                  id="icon"
+                />
+                <input
+                  type="url"
+                  placeholder="Enter a URL"
+                  value={url}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={names[index] || ""}
+                  onChange={(e) => {
+                    const newNames = [...names];
+                    newNames[index] = e.target.value;
+                    setNames(newNames);
+                  }}
+                />
 
-              <button
-                onClick={() => handleDelete(index)}
-                className="deletebutton"
-              >
-                <img src={cross} width={35} height={35}></img>
-              </button>
-            </div>
-            
-          ))}
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="deletebutton"
+                >
+                  <img src={cross} width={35} height={35}></img>
+                </button>
+              </div>
+            ))}
           </div>
-          
         </form>
         <br />
         <br />
