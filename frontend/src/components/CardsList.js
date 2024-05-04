@@ -3,10 +3,11 @@ import HorizontalCard from './HorizontalCard';
 
 const CardList = (props) => {
   const { userLinks, searchQuery } = props;
+  
 
   // Filter the cards based on the search query
   const filteredCards =userLinks && userLinks.filter((card) =>
-    card.linkName.toLowerCase().includes(searchQuery.toLowerCase())
+    card.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -14,7 +15,7 @@ const CardList = (props) => {
       {filteredCards && filteredCards.map((card) => (
         <HorizontalCard
           key={card.linkid}
-          linkName={card.linkName}
+          linkName={card.name}
           linkid={card.linkid}
           views={card.views}
           publish={card.published}

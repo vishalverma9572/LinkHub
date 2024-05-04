@@ -12,11 +12,16 @@ const get_user=db.get_user;
 const update_password=db.update_password;
 const deleteLink=db.deleteLink;
 const publishLink=db.publish;
+const createLink=db.postnewLink;
+const updateLink=db.updateLink;
+const getLink=db.getLink;
 const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
 mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
   // connection options (if any)
 });
+
+
 
 
 
@@ -68,7 +73,25 @@ app.post('/login', async (req, res) => {
 
 
 //secure route
+app.get('/get-link/:linkId', async (req, res) => {
+  
+  const linkId = req.params.linkId;
+  console.log(linkId);
 
+ 
+  try {
+    // Call the deleteLink function asynchronously
+    const link = await getLink( linkId);
+    console.log('Link fetched successfully');
+    res.status(200).json({ status: 'success', content: link });
+
+  } catch (error) {
+    // Handle link deletion errors
+    console.error('Link deletion error:', error);
+    res.status(400).json({ status: 'failed', error: error.message });
+  }
+}
+);
 app.use(authenticate);
 
 app.get('/dashboard', async (req, res) => {
@@ -149,6 +172,83 @@ app.put('/unpublish-link/:linkId', async (req, res) => {
     res.status(400).json({ status: 'failed', error: error.message });
   }
 });
+
+
+app.post('/create-link', async (req, res) => {
+  const email = req.user.email;
+  let jsonData;
+  //parsing request body to json to get data
+  if (typeof req.body === 'string') {
+    // Parse the string to JSON object
+     jsonData = JSON.parse(req.body);
+
+    // Now `jsonData` is a JavaScript object representing the parsed JSON data
+    console.log('Parsed JSON data:', jsonData);
+  }
+  else{
+     jsonData=req.body;
+  }
+
+  console.log(jsonData);
+  console.log(email, jsonData);
+
+  try {
+    // Call the createLink function asynchronously
+    const link = await createLink(email,jsonData);
+
+    if (link.error) {
+      // If createLink returns an error, send a failed response
+      res.status(400).json({ status: 'failed', error: link.error });
+    } else {
+      // Link creation successful, send a success response with the link object
+      res.status(200).json({ status: 'success', link: link });
+    }
+  } catch (error) {
+    // Handle link creation errors
+    console.error('Link creation error:', error);
+    res.status(400).json({ status: 'failed', error: error.message });
+  }
+
+});
+app.put('/update-link', async (req, res) => {
+  const email = req.user.email;
+  
+  let jsonData;
+  //parsing request body to json to get data
+  if (typeof req.body === 'string') {
+    // Parse the string to JSON object
+     jsonData = JSON.parse(req.body);
+
+    // Now `jsonData` is a JavaScript object representing the parsed JSON data
+    console.log('Parsed JSON data:', jsonData);
+  }
+  else{
+     jsonData=req.body;
+  }
+
+  console.log(jsonData);
+  console.log(email, jsonData);
+
+  try {
+    // Call the createLink function asynchronously
+    const link = await updateLink(email,jsonData);
+
+    if (link.error) {
+      // If createLink returns an error, send a failed response
+      res.status(400).json({ status: 'failed', error: link.error });
+    } else {
+      // Link creation successful, send a success response with the link object
+      res.status(200).json({ status: 'success', link: link });
+    }
+  } catch (error) {
+    // Handle link creation errors
+    console.error('Link creation error:', error);
+    res.status(400).json({ status: 'failed', error: error.message });
+  }
+
+}
+);
+
 
 
 app.listen(port, () => {

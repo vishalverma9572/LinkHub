@@ -42,17 +42,45 @@ const userSchema = new Schema({
 
 // Define the Link schema
 const linkSchema = new Schema({
-    url: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: Schema.Types.Mixed // Use Schema.Types.Mixed for arbitrary JSON data
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+  linkid: {
+      type: String,
+      required: true,
+      unique: true
+  },
+  view: {
+      type: Number,
+      default: 0
+  },
+  name: {
+      type: String,
+      required: true
+  },
+  published:{
+      type: Boolean,
+      default: false
+  },
+  lastupdated: {
+      type: Date,
+      default: Date.now
+  },
+  email: String,
+  phoneNumber: String,
+  bioHtml: String,
+  github: String,
+  x: String,
+  yt: String,
+  insta: String,
+  // Define the hyperlinks array
+  hyperlinks: [{
+      name: String,
+      url: String
+  }],
+  
+  profileImage: String,
+  createdAt: {
+      type: Date,
+      default: Date.now
+  }
 });
 
 // Create and export the User and Link models

@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Create from './pages/Create';
+import Edit from './pages/Edit';
 
 
 function App() {
@@ -27,6 +29,9 @@ function App() {
       logoutfun={logout}
       />} />
       <Route path='/profile' element={<Profile logoutfun={logout}/>} />
+      <Route path="/create" element={<Create />} />
+      <Route path="/edit/:linkid" element={<Edit/>} />
+      <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
     
       

@@ -1,0 +1,77 @@
+ .logo {
+    /* display: none; */
+  transform: scale(0.3);
+  position: fixed;
+  top: -200px; /* Start the logo off-screen */
+  right: 56.0%;
+  animation: bounce 1s ease-in-out 2.3s forwards, rotate 2s ease 0s forwards, swing 5s ease-in-out 2.6s forwards,swing2 5s ease-in-out 7.1s forwards,swing3 5s ease-in-out 11.8s forwards,swing4 5s ease-in-out 16.7 forwards; /* Start the swing animation after the previous animations */
+}
+
+@keyframes bounce {
+  0% {
+      top: -100px; /* Start position off-screen */
+      transform: scale(0.3);
+  }
+  50% {
+      top: 41%; /* Halfway through the animation, bounce to the middle */
+      transform: scale(0.7); /* Slightly increase the size */
+  }
+  100% {
+      top: 41%; /* End position at its actual position */
+      transform: scale(0.3); /* Return to the original size */
+  }
+}
+
+@keyframes rotate {
+  0% {
+      transform: scale(0.3) rotate(0deg); /* Start position */
+  }
+  100% {
+      transform: scale(0.3) rotate(-80deg); /* End position after 45 degrees rotation */
+  }
+}
+
+@keyframes swing {
+  0% {
+      transform: scale(0.3) rotate(-90deg); /* Start swinging from rotated position */
+  }
+  50% {
+      transform: scale(0.3) rotate(-90deg); /* Swing to the right */
+  }
+  100% {
+      transform: scale(0.3) rotate(-100deg); /* Swing back to the original position */
+  }
+}
+@keyframes swing2 {
+  0% {
+      transform: scale(0.3) rotate(-80deg); /* Start swinging from rotated position */
+  }
+  50% {
+      transform: scale(0.3) rotate(-70deg); /* Swing to the right */
+  }
+  100% {
+      transform: scale(0.3) rotate(-80deg); /* Swing back to the original position */
+  }
+}
+@keyframes swing3 {
+  0% {
+      transform: scale(0.3) rotate(-80deg); /* Start swinging from rotated position */
+  }
+  50% {
+      transform: scale(0.3) rotate(-70deg); /* Swing to the right */
+  }
+  100% {
+      transform: scale(0.3) rotate(-80deg); /* Swing back to the original position */
+  }
+}
+@keyframes swing4 {
+  0% {
+      transform: scale(0.3) rotate(-80deg); /* Start swinging from rotated position */
+  }
+  50% {
+      transform: scale(0.3) rotate(-70deg); /* Swing to the right */
+  }
+  100% {
+      transform: scale(0.3) rotate(-80deg); /* Swing back to the original position */
+  }
+} */
