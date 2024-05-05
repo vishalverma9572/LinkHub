@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.Shortview_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #c9d6ff;
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  /* background: black; */
+  background: linear-gradient(to right, #4e4d4d, #040404);
+
+}
+.Shortview_page .Container {
+    /* background-color: black; */
+  display: flex;
+  margin: auto;
+  width:60%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* margin-top: 60px; */
+  color: white
+  ;
+    border-radius: 10px;
+    /* border: 1px solid #ccc ; */
+  
+}
+.Shortview_page .Container .img_ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.Shortview_page .Container .img_ctn img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 75px;
+}
+
+.Shortview_page .Container .name_ctn h1 {
+  font-size: 1.3em;
+  margin-bottom: 50px;
+  font-family: 'Montserrat', sans-serif;    
+  font-weight: 600;
+
+}
+.Shortview_page .Container .default_links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .Shortview_page .Container .default_links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 1.8em;
+    transition: transform 0.3s ease; /* Add a smooth transform transition */
+  }
+  
+  .Shortview_page .Container .default_links a:hover {
+    font-size: 1.9em;
+    transform: scale(1.1); /* Slightly increase size on hover */
+  }
+  .Shortview_page .Container .footer a img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    filter: invert(1);
+  }
+
+    .Shortview_page .Container .footer {
+        display: flex;
+        
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+  .Shortview_page .Container .footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 5px;
+    text-decoration: none;
+    background-color: rgb(233, 230, 230);
+    margin: 0 10px;
+    padding: 15px;
+    border-radius: 25px;
+
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    transition: transform 0.3s ease; /* Add a smooth transform transition */
+  }
+  .Shortview_page .Container .footer a:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    background-color: white;
+  }
+  
+  
+
+.Shortview_page .Container .rowcard_container {
+  display: flex;
+  width: 65%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.Shortview_page .Container .rowcard_container button {
+    color: white;
+}
+.Shortview_page .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+}
+.Shortview_page .header {
+    position: fixed;
+    display: flex;
+    top: 30px;
+    left: 65%;
+    justify-content: end;
+    align-items: right;
+    margin-bottom: 20px;
+    color: white;
+}
+.Shortview_page .header svg{
+    color: white;
+    font-size: 1.2rem;
+}
+
+  
+  .Shortview_page .dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  

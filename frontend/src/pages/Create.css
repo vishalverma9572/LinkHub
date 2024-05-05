@@ -93,6 +93,19 @@
     /* Transition for smooth shadow effect */
     transition: box-shadow 0.3s ease;
   }
+  .Create_page .Create_container .morelinks{
+    margin-top: 50 px;
+
+  }
+  .Create_page .Create_container .morelinks h2{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #1a112c;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    font-family: "Open Sans", sans-serif;
+  }
+
 
 
   

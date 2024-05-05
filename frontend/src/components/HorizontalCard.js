@@ -17,7 +17,8 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
     year: 'numeric'
   });
   
-  const url = `/view/${linkid}`;
+  const url = `/shortview/${linkid}`;
+  const pageurl = `/pageview/${linkid}`;
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
@@ -105,7 +106,10 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
 
 
   const handleView = () => {
-    navigate(`/view/${linkid}`);
+    navigate(`/shortview/${linkid}`);
+  };
+  const handlefullView = () => {
+    navigate(`/pageview/${linkid}`);
   };
 
   const handleEdit = () => {
@@ -127,6 +131,23 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
       console.log('Web Share API not supported');
     }
   };
+  const handlepageShareClick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url: pageurl,
+        });
+        console.log('Link shared successfully');
+      } catch (error) {
+        console.error('Error sharing link:', error);
+      }
+    } else {
+      console.log('Web Share API not supported');
+    }
+  };
+
+
 
   return (
     <div className="horizontal-card">
@@ -157,8 +178,14 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
             <button onClick={handleView}>
               <FontAwesomeIcon icon={faEye} /> View
             </button>
+            <button onClick={handlefullView}>
+              <FontAwesomeIcon icon={faEye} /> Page View
+            </button>
             <button onClick={handleShareClick}>
-              <FontAwesomeIcon icon={faShare} /> Share
+              <FontAwesomeIcon icon={faShare} /> Share Hub
+            </button>
+            <button onClick={handlepageShareClick}>
+              <FontAwesomeIcon icon={faShare} /> Share Page
             </button>
             <button onClick={handleEdit}>
               <FontAwesomeIcon icon={faEdit} /> Edit

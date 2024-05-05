@@ -15,10 +15,9 @@ import { FaEllipsisV } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 
 import  toggleMenu  from "../components/Togglemenu";
-import './Fullview.css'
 // import './Shortview.css'
 
-export default function Fullview() {
+export default function Shortview() {
   const { linkid } = useParams();
 
   const [Data, setData] = useState({
@@ -51,7 +50,6 @@ export default function Fullview() {
         if (data.status == "success") {
           setData(data.content);
           setLoading(false);
-          console.log(data.content);
         } else {
           setError(true);
           setLoading(false);
@@ -65,24 +63,28 @@ export default function Fullview() {
     };
     fetchData();
   }, []);
-  const {email, github, yt,x, insta, phoneNumber, profileImage, bioHtml, hyperlinks} = Data;
+  const { email, github, yt, insta, x, phoneNumber } = Data;
   return (
     <>
       {!Error ? (
-                <div className="fullview-container">
-                {/* Top Section */}
-                <div className="top-section">
-                  {/* Left Side: Profile Image */}
-                  <div className="profile-image-container">
-                    {profileImage && <img src={profileImage} alt="Profile" className="profile-image" />}
-                  </div>
-          
-                  {/* Right Side: Contact Info */}
-                  <div className="contact-info">
-                    {phoneNumber && <p>Phone: {phoneNumber}</p>}
-                    {email && <p>Email: {email}</p>}
-                  </div>
-                  <div className="default_links">
+                <div className="Shortview_page">
+                    {/* <div className="header">
+      
+        <div className="actions">
+            <BsThreeDots onClick={toggleMenu} />
+        </div>
+        </div> */}
+          <div className="Container">
+            <div className="img_ctn">
+              {Data.profileImage && (
+                <img src={Data.profileImage} alt="profile" />
+              )}
+            </div>
+            <div className="name_ctn">
+              <h1>@{Data.name}</h1>
+            </div>
+            
+            <div className="default_links">
               {/* //showing only icons in a row */}
 
               {email && (
@@ -140,25 +142,24 @@ export default function Fullview() {
                 </a>
               )}
             </div>
-                </div>
-          
-                {/* Bottom Sections */}
-                <div className="bottom-section">
-                  {/* Left Side: Bio HTML */}
-                  <div className="bio-html" dangerouslySetInnerHTML={{ __html: bioHtml }} />
-          
-                  {/* Right Side: Links Cards */}
-                  <div className="links-container">
-                    {hyperlinks.map((link, index) => (
-                      <RowCard
-                      imageUrl={`https://www.google.com/s2/favicons?sz=64&domain=${link.url}`}
-                      text={link.name}
-                      url={link.url}
-                    />
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <div className="rowcard_container">
+              {Data.hyperlinks.map((link) => (
+                <RowCard
+                  imageUrl={`https://www.google.com/s2/favicons?sz=64&domain=${link.url}`}
+                  text={link.name}
+                  url={link.url}
+                />
+              ))}
+            </div>
+
+            <div className="footer">
+                <Link to={"/"}><img src={logo} alt="logo"/>Create Your LinkHub</Link>
+                
+            </div>
+
+
+          </div>
+        </div>
       ) : (
         <NotFound404 />
       )}

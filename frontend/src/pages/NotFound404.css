@@ -24,8 +24,8 @@ body .container404page{
     align-items: center;
     justify-content: center;
     background: linear-gradient(to right, #b5c1d6, #468fd9);
-    background: linear-gradient(to right, #5c6bc0, #512da8);
-    background: linear-gradient(to right, #5c6bc08d, #522da874);
+    /* background: linear-gradient(to right, #5c6bc0, #512da8); */
+    /* background: linear-gradient(to right, #5c6bc08d, #522da874); */
     font-family: 'Roboto', sans-serif;
 }
 

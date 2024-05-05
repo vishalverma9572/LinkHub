@@ -1,6 +1,10 @@
 import './App.css';
 import Register from './pages/Register';
 import { Route, Routes, useNavigate } from "react-router-dom";
+import Shortview from './pages/Shortview';
+
+
+
 
 import Authorise from './pages/Authorise';
 import Login from './pages/Login';
@@ -10,6 +14,8 @@ import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Edit from './pages/Edit';
 import NotFound404 from './pages/NotFound404';
+import Fullview from './pages/Fullview';
+
 
 
 function App() {
@@ -32,6 +38,13 @@ function App() {
       <Route path='/profile' element={<Profile logoutfun={logout}/>} />
       <Route path="/create" element={<Create />} />
       <Route path="/edit/:linkid" element={<Edit/>} />
+      <Route path="/shortview/:linkid" element={<Shortview/>} />
+      {/* <Route path="/" element={<Preview/>} /> */}
+
+      {/* <Route path="/preview" element={<Preview />} /> */}
+      {/* <Route path="/preview" element={<Preview />}  /> */}
+
+      <Route path='/pageview/:linkid' element={<Fullview/>} />
       <Route path="*" element={<NotFound404/>} />
     </Routes>
     

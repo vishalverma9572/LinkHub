@@ -18,35 +18,45 @@ import question from "../images/question_mark.png";
 import tick from "../images/tickmark.png";
 import { FaPencil, FaEnvelope, FaPhone } from "react-icons/fa6";
 
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import axios from "axios";
 import uniqid from "uniqid";
 
 export default function () {
-
   const [existednames, setExistednames] = React.useState(null);
   const [alreadyExists, setAlreadyExists] = React.useState(false);
   const [quillvalue, setQuillValue] = useState("");
   const modules = {
     toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean']
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      ["clean"],
     ],
   };
 
   const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
   ];
 
-  
   useEffect(() => {
     document.title = "Create | LinkHub";
     async function fetchData() {
@@ -61,9 +71,9 @@ export default function () {
 
       // Parse the JSON response
       const data = await response.json();
-      console.log(data.user.userLinks.map(link => link.name));
+      console.log(data.user.userLinks.map((link) => link.name));
       // setData(data);
-      setExistednames(data.user.userLinks.map(link => link.name))
+      setExistednames(data.user.userLinks.map((link) => link.name));
       if (data.status === "failed") {
         // Redirect to login if token is invalid or expired
         window.location.href = "/signin";
@@ -80,8 +90,8 @@ export default function () {
   const [favicons, setFavicons] = useState([]);
   const uuid = uniqid();
   const [formData, setFormData] = useState({
-    linkid: '',
-    published:false,
+    linkid: "",
+    published: false,
     name: "",
     email: "",
     phoneNumber: "",
@@ -94,10 +104,10 @@ export default function () {
     profileImage: "",
   });
   useEffect(() => {
-    if(existednames){
-      if(existednames.includes(formData.name)){
+    if (existednames) {
+      if (existednames.includes(formData.name)) {
         setAlreadyExists(true);
-      }else{
+      } else {
         setAlreadyExists(false);
       }
     }
@@ -107,27 +117,24 @@ export default function () {
     e.preventDefault();
     const uuid = uniqid();
     try {
-      
       // Send form data to server using Axios
       // await axios.post("/api/formdata", formData);
-      if(alreadyExists){
+      if (alreadyExists) {
         alert("Alias of this name already exists");
         return;
       }
       alert("Form data submitted successfully");
-      let tosaveformdata= {...formData,
+      let tosaveformdata = {
+        ...formData,
         linkid: uuid,
         bioHtml: quillvalue,
         hyperlinks: urls.map((url, i) => ({
           name: names[i] || `Link ${i + 1}`,
           url: url,
-        }))
-      
+        })),
       };
-      let x=JSON.stringify(tosaveformdata);
-      console.log(
-        "datatype of x is",
-        x);
+      let x = JSON.stringify(tosaveformdata);
+      console.log("datatype of x is", x);
       const response = await fetch("http://localhost:4500/create-link", {
         method: "POST",
         headers: {
@@ -137,34 +144,31 @@ export default function () {
         body: JSON.stringify(tosaveformdata),
       });
       const data = await response.json();
-      
+
       if (data.status === "failed") {
         // Redirect to login if token is invalid or expired
-       
+
         window.location.href = "/signin";
       }
       if (data.status === "success") {
-        window.location.href = '/dashboard';
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error("Error submitting form data:", error);
       //
-      let message="Error submitting form data";
+      let message = "Error submitting form data";
       //setting message for payload large
-        if(error.message.includes("413")){
-            alert("Payload too large");
-        }
-        else{
-          alert(`${message}`);
-        }
-        
+      if (error.message.includes("413")) {
+        alert("Payload too large");
+      } else {
+        alert(`${message}`);
+      }
     }
   };
 
   const handleVariation = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
   };
 
   const [names, setNames] = useState([]);
@@ -199,10 +203,6 @@ export default function () {
     const inputFile = document.querySelector("#file");
     inputFile.click();
   };
-  
-
-
-
 
   const [val, setVal] = useState([]);
   const handleAdd = () => {
@@ -223,8 +223,6 @@ export default function () {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-
-  
 
   const handleFileChange = (event) => {
     const inputFile = event.target;
@@ -256,12 +254,17 @@ export default function () {
   };
 
   const handlepreview = () => {
-    //stringify the formdata and send it to the preview page without sending linkid
-    window.open("/preview/?formdata="+JSON.stringify(formData)) ;
-  }
+    // Create a copy of the formData object and exclude the 'linkid' property
+    const formDataCopy = { ...formData };
+    delete formDataCopy.linkid;
   
-
-
+    // Stringify the modified formData and send it to the preview page
+    const formDataString = JSON.stringify(formDataCopy);
+    const encodedFormData = encodeURIComponent(formDataString);
+  
+    // Open the preview page with the encoded formdata parameter
+    window.open(`/preview/?formdata=${encodedFormData}`);
+  };
 
   const [charIndex, setCharIndex] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
@@ -300,8 +303,6 @@ export default function () {
     return () => clearInterval(typingInterval);
   }, [charIndex, wordIndex, words]);
 
-  
-
   return (
     <div className="Create_page">
       <div className="Side_container">
@@ -310,24 +311,23 @@ export default function () {
           <span className="stop-blinking">{dynamicText}</span>.
         </h1>
         <div className="button_container">
-          
-          <button onClick={handlepreview}>Preview</button>
-
-          
+          {/* <button onClick={handlepreview}>Preview</button> */}
         </div>
       </div>
       <div className="Create_container">
         <form onSubmit={handleSubmit} className="form">
-          
-
           <button type="submit" className="create_submit">
             Submit
           </button>
           <div>
-            
-            
             <div className="img-area">
-              <input type="file" id="file" onChange={handleFileChange} accept="image/*" hidden />
+              <input
+                type="file"
+                id="file"
+                onChange={handleFileChange}
+                accept="image/*"
+                hidden
+              />
               <img
                 src={profileIcon}
                 width="100px"
@@ -355,7 +355,11 @@ export default function () {
                   autoComplete="off"
                   required
                 />
-                {alreadyExists && (<p style={{color: "#f409d2"}}>* Alias of this name already exists... *</p>)}
+                {alreadyExists && (
+                  <p style={{ color: "#f409d2" }}>
+                    * Alias of this name already exists... *
+                  </p>
+                )}
               </div>
               <div className="row">
                 <div className="input-box">
@@ -386,9 +390,7 @@ export default function () {
               <div className="bio-input-box">
                 <label>Bio</label>
                 {/* <textarea placeholder="Enter your bio"></textarea> */}
-               
-                  
-                    
+
                 <ReactQuill
                   theme="snow"
                   value={quillvalue}
@@ -396,8 +398,6 @@ export default function () {
                   modules={modules}
                   formats={formats}
                 />
-                  
-             
               </div>
               <div className="socials_links">
                 <h2>Social Handles</h2>
@@ -467,47 +467,47 @@ export default function () {
             </div>
           </div>
           <div className="morelinks">
-          <button type="button" onClick={handleAdd} className="addbutton">
-          
-            <img src={add} width="30px" height={"30px"}></img>
-          </button>
-          {urls.map((url, index) => (
-            <div className="input-box2" key={index}>
-              <img
-                src={favicons[index] || question}
-                alt={github}
-                style={{ width: "40px", height: "40px" }}
-                className="addsocialsicon"
-                id="icon"
-              />
-              <input
-                type="url"
-                placeholder="Enter a URL"
-                value={url}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              <input
-                type="text"
-                placeholder="Name"
-                value={names[index] || ""}
-                onChange={(e) => {
-                  const newNames = [...names];
-                  newNames[index] = e.target.value;
-                  setNames(newNames);
-                }}
-              />
+            {/* //show if atleast one link is added */}
+            {urls.length > 0 && <h2>Links</h2>}
 
-              <button
-                onClick={() => handleDelete(index)}
-                className="deletebutton"
-              >
-                <img src={cross} width={35} height={35}></img>
-              </button>
-            </div>
-            
-          ))}
+            {urls.map((url, index) => (
+              <div className="input-box2" key={index}>
+                <img
+                  src={favicons[index] || question}
+                  alt={github}
+                  style={{ width: "40px", height: "40px" }}
+                  className="addsocialsicon"
+                  id="icon"
+                />
+                <input
+                  type="url"
+                  placeholder="Enter a URL"
+                  value={url}
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={names[index] || ""}
+                  onChange={(e) => {
+                    const newNames = [...names];
+                    newNames[index] = e.target.value;
+                    setNames(newNames);
+                  }}
+                />
+
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="deletebutton"
+                >
+                  <img src={cross} width={35} height={35}></img>
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={handleAdd} className="addbutton">
+              <img src={add} width="30px" height={"30px"}></img>
+            </button>
           </div>
-          
         </form>
         <br />
         <br />

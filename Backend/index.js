@@ -18,11 +18,20 @@ const getLink=db.getLink;
 const viewLink=db.viewLink;
 const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
+const nodemailer = require('nodemailer');
 mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
   // connection options (if any)
 });
 
-
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  secure: true,
+  port: 465,
+  auth: {
+    user: "linkhub055@gmail.com", // Update with your Gmail email address
+    pass: "hpmcsmmmejxpefhw", // Update with your Gmail password or app password
+  },
+});
 
 
 
@@ -65,6 +74,26 @@ app.post('/register', async (req, res) => {
             // Registration successful, send a success response with the user object
             res.status(200).json({ status: 'success', user: user });
         }
+        let mailOptions = {
+          from: 'linkhub055@gmail.com',
+          to: email,
+          subject: 'Welcome to LinkHub!',
+          html: `
+              <h3>Hello ${name}!, welcome to our app!</h3>
+              <img src="https://ibb.co/k1TV3zG" alt="Banner Image" style="display: block; max-width: 100%; height: auto;object-fit: fill; margin-bottom: 20px;">
+              <p>We're excited to have you on board. Our app is a link hub that allows you to easily share all your links in one place. We hope you enjoy using it!</p>
+              <a href="http://localhost:3000/" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit Our Website</a>
+          `
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.error("Error sending email:", error);
+          } else {
+            console.log("Email sent:", info.response);
+          }
+        });
+          
     } catch (error) {
         // Handle registration errors
         console.error('Registration error:', error);
@@ -238,7 +267,9 @@ app.put('/update-link', async (req, res) => {
      jsonData = JSON.parse(req.body);
 
     // Now `jsonData` is a JavaScript object representing the parsed JSON data
-    console.log('Parsed JSON data:', jsonData);
+    // console.log('Parsed JSON data:', jsonData);
+    //print biohtml
+    // console.log(jsonData.biohtml);
   }
   else{
      jsonData=req.body;

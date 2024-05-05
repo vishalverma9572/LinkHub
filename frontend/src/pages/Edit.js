@@ -209,6 +209,7 @@ export default function () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     try {
       // Send form data to server using Axios
@@ -220,7 +221,7 @@ export default function () {
       alert(" submitting Form data...");
       let tosaveformdata = {
         ...formData,
-
+        bioHtml: quillvalue,
         hyperlinks: urls.map((url, i) => ({
           name: names[i] || `Link ${i + 1}`,
           url: url,
@@ -346,8 +347,16 @@ export default function () {
   };
 
   const handlepreview = () => {
-    //stringify the formdata and send it to the preview page without sending linkid
-    window.open("/preview/?formdata=" + JSON.stringify(formData));
+    // Create a copy of the formData object and exclude the 'linkid' property
+    const formDataCopy = { ...formData };
+    delete formDataCopy.linkid;
+  
+    // Stringify the modified formData and send it to the preview page
+    const formDataString = JSON.stringify(formDataCopy);
+    const encodedFormData = encodeURIComponent(formDataString);
+  
+    // Open the preview page with the encoded formdata parameter
+    window.open(`/preview/?formdata=${encodedFormData}`);
   };
 
   const [charIndex, setCharIndex] = useState(0);
@@ -395,7 +404,7 @@ export default function () {
           <span className="stop-blinking">{dynamicText}</span>.
         </h1>
         <div className="button_container">
-          <button onClick={handlepreview}>Preview</button>
+          {/* <button onClick={handlepreview}>Preview</button> */}
         </div>
       </div>
       <div className="Create_container">
@@ -550,9 +559,8 @@ export default function () {
             </div>
           </div>
           <div className="morelinks">
-            <button type="button" onClick={handleAdd} className="addbutton">
-              <img src={add} width="30px" height={"30px"}></img>
-            </button>
+          {urls.length>0 && <h2>Links</h2>}
+            
             {urls.map((url, index) => (
               <div className="input-box2" key={index}>
                 <img
@@ -587,6 +595,9 @@ export default function () {
                 </button>
               </div>
             ))}
+            <button type="button" onClick={handleAdd} className="addbutton">
+              <img src={add} width="30px" height={"30px"}></img>
+            </button>
           </div>
         </form>
         <br />

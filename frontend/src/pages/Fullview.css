@@ -1,0 +1,103 @@
+/* FullviewLayout.css */
+
+.fullview-container {
+    /* max-width: 800px; */
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .fullview-container .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    /* padding: 40px; */
+  }
+  
+  .fullview-container .profile-image-container {
+    width: 150px;
+    height: 150px;
+  }
+  .fullview-container .top-section .default_links {
+    display: flex;
+    justify-content: left;
+    min-width: 200px;
+    align-items: center;
+    padding-right: 50px;
+    margin-bottom: 20px;
+  }
+  .fullview-container .top-section .default_links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 1.8em;
+    transition: transform 0.3s ease; /* Add a smooth transform transition */
+  }
+  .fullview-container .top-section .default_links a:hover{
+    font-size: 1.9em;
+    transform: scale(1.1); /* Slightly increase size on hover */
+  }
+
+  
+  .fullview-container .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .fullview-container .contact-info {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .fullview-container .bottom-section {
+    display: flex;
+  }
+  
+  .fullview-container .bio-html {
+    
+    flex: 1;
+    min-width: 60%;
+    margin-right: 30px;
+    padding: 30px;
+  }
+  .fullview-container .bio-html h1 {
+    margin-bottom: 20px;
+  }
+  .fullview-container .bio-html p {
+    margin-bottom: 20px;
+  }
+  .fullview-container .bio-html a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .fullview-container .bio-html a:hover {
+    text-decoration: underline;
+  }
+
+  .fullview-container .bio-html img{
+    max-width: 80%;
+    margin-bottom: 20px;
+    object-fit: cover;
+  }
+  
+  .fullview-container .links-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .fullview-container .links-container .row-card{
+    max-height:65px;
+  }
+  .fullview-container .links-container .row-card svg{
+    color: white;
+  }
+  
