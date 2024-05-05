@@ -16,6 +16,8 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    // adding resetToken
+    resetToken: { type: String },
     userLinks: [{
         linkid: {
             type: String,

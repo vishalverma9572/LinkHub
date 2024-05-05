@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Authorise.css";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -141,6 +141,7 @@ function Authorise(props) {
               type="text"
               placeholder="Name"
               value={newName}
+              autoComplete="off"
               onChange={(e) => setNewName(e.target.value)}
             />
           </div>
@@ -150,6 +151,7 @@ function Authorise(props) {
               type="email"
               placeholder="Email"
               value={newEmail}
+              autoComplete="new-email"
               onChange={(e) => setNewEmail(e.target.value)}
             />
           </div>
@@ -159,6 +161,10 @@ function Authorise(props) {
               type="password"
               placeholder="Password"
               value={newPassword}
+              autoComplete="new-password"
+              // dont fill saved password
+
+
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
@@ -189,6 +195,7 @@ function Authorise(props) {
             />
          </div>
           {errrormsg && (<p className="errormsg">* {errrormsg} *</p>)}
+          <Link to="/forgot-password" className="forgot_p_css">Forgot Password</Link>
           <button type="submit">Sign In</button>
         </form>
       </div>

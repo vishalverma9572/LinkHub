@@ -9,7 +9,7 @@ import Nav from '../components/Nav';
 const ProfilePage = (props) => {
     const [data, setData] = React.useState(null);
     useEffect(() => {
-        document.title = "Dashboard | LinkHub";
+        document.title = "Profile | LinkHub";
         async function fetchData() {
           // Fetch data from the backend endpoint with Authorization header
           const response = await fetch("http://localhost:4500/dashboard", {

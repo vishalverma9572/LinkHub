@@ -241,39 +241,46 @@ async function updateLink(email, data1) {
 //view link for public use
 async function viewLink(linkId) {
     try {
-
-        const link = await Model.Link
-            .findOne({ linkid: linkId })
-            .select('-__id -__v')
-            .exec();
+        // Find the link by linkId
+        const link = await Model.Link.findOne({ linkid: linkId }).exec();
+        
         if (!link) {
             throw new Error('Link not found');
-            
         }
+
         if (link.published === false) {
             throw new Error('Link not published');
         }
+
         // Increment the views count for the link
+        link.views += 1;
+        await link.save();
+
+        // Find the user associated with this link
+        const user = await Model.User.findOne({ "userLinks.linkid": linkId }).exec();
         
-        
-        //increment the views count for the userLink
-        const user = await Model.User.findOne({ "userLinks.linkid": linkId });
         if (!user) {
             throw new Error('User not found');
         }
-        const userLink = user.userLinks.find(link => link.linkid === linkId);
+
+        // Find the specific userLink for the given linkId
+        const userLink = user.userLinks.find(ul => ul.linkid === linkId);
         
-        viewcount=Math.max(link.views+1,userLink.views+1);
-        link.views = viewcount;
-        userLink.views = viewcount;
-        await link.save();
+        if (!userLink) {
+            throw new Error('UserLink not found');
+        }
+
+        // Increment the views count for the userLink
+        userLink.views += 1;
         await user.save();
+
+        // Return the updated link
         return link;
-    }
-    catch (error) {
-        throw error;
+    } catch (error) {
+        throw error; // Rethrow the error to propagate it up
     }
 }
+
 
 
 

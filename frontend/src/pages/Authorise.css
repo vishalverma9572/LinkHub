@@ -76,6 +76,17 @@
     height: 100%;
 }
 
+.container .forgot_p_css{
+    color: #512da8;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+.container .forgot_p_css:hover{
+   scale:1.1;
+}
+
+
 .container input{
     background-color: #eee;
     border: none;

@@ -161,4 +161,26 @@
     background: none;
     cursor: pointer;
   }
+
+  /* //phone view
+   */
+  @media screen and (max-width: 768px) {
+    
+   
+    body{
+      padding: 0 !important;
+    }
+    .Shortview_page .Container {
+      width: 100%;
+    }
+    .Shortview_page .Container .rowcard_container {
+      width: 100%;
+    }
+    .Shortview_page .Container .default_links a {
+      font-size: 1.5em;
+    }
+    .Shortview_page .Container .footer a {
+      font-size: 0.8em;
+    }
+  }
   

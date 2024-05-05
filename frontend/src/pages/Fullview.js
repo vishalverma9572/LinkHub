@@ -16,6 +16,7 @@ import { BsThreeDots } from "react-icons/bs";
 
 import  toggleMenu  from "../components/Togglemenu";
 import './Fullview.css'
+// import Footer from "../components/Footer";
 // import './Shortview.css'
 
 export default function Fullview() {
@@ -42,6 +43,7 @@ export default function Fullview() {
   const [Loading, setLoading] = useState(true);
   const [Error, setError] = useState(false);
   useEffect(() => {
+    document.title = "PageView | LinkHub";
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -58,6 +60,26 @@ export default function Fullview() {
         }
 
         console.log(data.content);
+        //if mobile device redirect to shortview
+        if (window.innerWidth < 768) {
+          window.location.href = `/shortview/${linkid}`;
+        }
+        if(data.content.bioHtml === "<p><br></p>") {
+          window.location.href = `/shortview/${linkid}`;
+        }
+        else if(data.content.bioHtml === ""){
+          window.location.href = `/shortview/${linkid}`;
+        }
+        else if(data.content.bioHtml === "<p></p>"){
+          window.location.href = `/shortview/${linkid}`;
+        }
+        else if(data.content.bioHtml === " "){
+          window.location.href = `/shortview/${linkid}`;
+        }
+        else if(data.content.bioHtml === "<p> </p>"){
+          window.location.href = `/shortview/${linkid}`;
+        }
+        
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -156,8 +178,12 @@ export default function Fullview() {
                       url={link.url}
                     />
                     ))}
+                    
+
                   </div>
                 </div>
+                {/* <Footer /> */}
+
               </div>
       ) : (
         <NotFound404 />

@@ -41,6 +41,7 @@ export default function Shortview() {
   const [Loading, setLoading] = useState(true);
   const [Error, setError] = useState(false);
   useEffect(() => {
+    document.title = "View | LinkHub";
     const fetchData = async () => {
       try {
         const response = await fetch(

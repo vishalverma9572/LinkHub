@@ -8,7 +8,10 @@ import { FaRegShareSquare } from "react-icons/fa";
 const RowCard = ({  text, url }) => {
   const [isHovered, setIsHovered] = useState(false);
   const imageUrl = `https://www.google.com/s2/favicons?sz=64&domain=${url}`;
-  
+  //crop text if too long
+  if (text.length > 50) {
+    text = text.substring(0, 50) + '...';
+  }
   const handleMouseEnter = () => {
     setIsHovered(true);
   };

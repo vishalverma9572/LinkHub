@@ -80,10 +80,12 @@ app.post('/register', async (req, res) => {
           subject: 'Welcome to LinkHub!',
           html: `
               <h3>Hello ${name}!, welcome to our app!</h3>
-              <img src="https://ibb.co/k1TV3zG" alt="Banner Image" style="display: block; max-width: 100%; height: auto;object-fit: fill; margin-bottom: 20px;">
+              
               <p>We're excited to have you on board. Our app is a link hub that allows you to easily share all your links in one place. We hope you enjoy using it!</p>
               <a href="http://localhost:3000/" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit Our Website</a>
-          `
+              <hr style="margin-top: 20px; border: none; border-top: 1px solid #ccc;">
+              <p style="margin-top: 20px;">Team LinkHub</p>
+              `
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -117,6 +119,60 @@ app.post('/login', async (req, res) => {
         res.status(401).json({status:'failed', error: 'Invalid credentials' });
     }
 });
+
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  console.log(email)
+  const user = await User.findOne({ email });
+  console.log(user)
+  console.log(email)
+
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  const resetToken = Math.random().toString(36).substr(2, 10);
+  user.resetToken = resetToken;
+  await user.save();
+
+
+
+  const mailOptions = {
+    from: 'linkhub055@gmail.com',
+    to: email,
+    subject: 'Reset Password',
+    text: `Click on this link to reset your password: http://localhost:3000/set-password/${resetToken}`
+  };
+console.log(email,resetToken)
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Email sent: ' + info.response);
+    res.json({ message: 'Reset password link sent to your email' });
+  });
+});
+
+
+
+app.post('/reset-password/:token', async (req, res) => {
+  console.log(req.params)
+  const token = req.params.token;
+  const newPassword = req.body.newPassword; // extract the new password value
+
+  const user = await User.findOne({ resetToken: token });
+
+  if (!user) {
+    return res.status(404).json({ error: 'Invalid reset token' });
+  }
+
+  user.password = newPassword; // set the new password
+  user.resetToken = null;
+  await user.save();
+
+  res.json({ message: 'Password reset successfully' });
+});
+
 
 
 //secure route

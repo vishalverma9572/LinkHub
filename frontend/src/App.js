@@ -15,7 +15,8 @@ import Create from './pages/Create';
 import Edit from './pages/Edit';
 import NotFound404 from './pages/NotFound404';
 import Fullview from './pages/Fullview';
-
+import ForgotPassword from './pages/ForgotPassword';
+import PasswordReset from './pages/passwordReset';
 
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
 
       <Route path='/pageview/:linkid' element={<Fullview/>} />
       <Route path="*" element={<NotFound404/>} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+       <Route path="/set-password/:token" element={<PasswordReset />} />
     </Routes>
     
       
