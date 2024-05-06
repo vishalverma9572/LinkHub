@@ -141,7 +141,15 @@ app.post('/forgot-password', async (req, res) => {
     from: 'linkhub055@gmail.com',
     to: email,
     subject: 'Reset Password',
-    text: `Click on this link to reset your password: http://localhost:3000/set-password/${resetToken}`
+    html: `
+              <h3>Hello LinkHub User!</h3>
+              
+              <p>Click on this link to reset your password!</p>
+              <a href="http://localhost:3000/set-password/${resetToken}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit This Link</a>
+              <p>If you did not initiate this change, Kindly change your password or contact us immediately.</p>
+              <hr style="margin-top: 20px; border: none; border-top: 1px solid #ccc;">
+              <p style="margin-top: 20px;">Team LinkHub</p>
+    `
   };
 console.log(email,resetToken)
   transporter.sendMail(mailOptions, (error, info) => {
@@ -171,6 +179,8 @@ app.post('/reset-password/:token', async (req, res) => {
   await user.save();
 
   res.json({ message: 'Password reset successfully' });
+  
+  
 });
 
 
