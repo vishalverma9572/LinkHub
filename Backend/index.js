@@ -19,6 +19,8 @@ const viewLink=db.viewLink;
 const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+
 mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
   // connection options (if any)
 });
@@ -28,8 +30,8 @@ const transporter = nodemailer.createTransport({
   secure: true,
   port: 465,
   auth: {
-    user: "linkhub055@gmail.com", // Update with your Gmail email address
-    pass: "hpmcsmmmejxpefhw", // Update with your Gmail password or app password
+    user: process.env.EMAIL_USER, // Access email username from environment variable
+    pass: process.env.EMAIL_PASSWORD, // Access email password from environment variable
   },
 });
 
@@ -75,7 +77,7 @@ app.post('/register', async (req, res) => {
             res.status(200).json({ status: 'success', user: user });
         }
         let mailOptions = {
-          from: 'linkhub055@gmail.com',
+          from: process.env.EMAIL_USER,
           to: email,
           subject: 'Welcome to LinkHub!',
           html: `
@@ -138,7 +140,7 @@ app.post('/forgot-password', async (req, res) => {
 
 
   const mailOptions = {
-    from: 'linkhub055@gmail.com',
+    from: process.env.EMAIL_USER,
     to: email,
     subject: 'Reset Password',
     html: `
