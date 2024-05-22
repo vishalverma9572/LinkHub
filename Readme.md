@@ -108,7 +108,7 @@ To set up the project locally, follow these steps:
    npm start
    ```
 
-   This will start the backend server on `http://localhost:5000`.
+   This will start the backend server on `http://localhost:4500`.
 
 2. **Start the frontend server:**
 
