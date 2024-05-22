@@ -1,12 +1,4 @@
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    secure: true,
-    port: 465,
-    auth: {
-      user: "linkhub055@gmail.com", // Update with your Gmail email address
-      pass: "hpmcsmmmejxpefhw", // Update with your Gmail password or app password
-    },
-  });
+
   
   app.post('/register', async (req, res) => {
       const { name, email, password } = req.body;
