@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "66368f4a621c320b5e8a89a5"
+  },
+  "name": "Vishal Verma",
+  "email": "vishalverma9572@gmail.com",
+  "password": "Vv@12345",
+  "userLinks": [
+    {
+      "linkid": "lvsj20wc",
+      "views": 338,
+      "published": true,
+      "name": "Vishal Verma",
+      "lastupdated": {
+        "$date": "2024-05-05T23:07:43.542Z"
+      },
+      "_id": {
+        "$oid": "6636939870ec4a33e7947bfb"
+      }
+    },
+    {
+      "linkid": "lvu3d80y",
+      "views": 69,
+      "published": true,
+      "name": "seedhemaut",
+      "lastupdated": {
+        "$date": "2024-05-05T22:49:15.606Z"
+      },
+      "_id": {
+        "$oid": "6638050c9c9956e01493c13b"
+      }
+    },
+    {
+      "linkid": "lvu5169a",
+      "views": 18,
+      "published": false,
+      "name": "DIVINE Official",
+      "lastupdated": {
+        "$date": "2024-05-05T23:02:57.058Z"
+      },
+      "_id": {
+        "$oid": "66380ff99c9956e01493c5ed"
+      }
+    }
+  ],
+  "__v": 11,
+  "resetToken": "9xhxijlj3t"
+},
+{
+  "_id": {
+    "$oid": "663811a09c9956e01493c7a9"
+  },
+  "name": "Aaditya Verma",
+  "email": "22bc001@iiitdmj.ac.in",
+  "password": "1234@asd",
+  "userLinks": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663813dacdea9b72f1b744e2"
+  },
+  "name": "fafas",
+  "email": "22bec132@iiitdmj.ac.in",
+  "password": "asdf1234@",
+  "userLinks": [
+    {
+      "linkid": "lvu5pbrb",
+      "views": 0,
+      "published": false,
+      "name": "xyz",
+      "lastupdated": {
+        "$date": "2024-05-05T23:21:04.683Z"
+      },
+      "_id": {
+        "$oid": "6638146011e44d3c11ac42fd"
+      }
+    }
+  ],
+  "__v": 1,
+  "resetToken": "hkuso4zgal"
+},
+{
+  "_id": {
+    "$oid": "663877cd30617ce10c4a27e3"
+  },
+  "name": "Utkarsh ",
+  "email": "22mca10@iiitdmj.ac.in",
+  "password": "asdf12@",
+  "userLinks": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6638780f30617ce10c4a27e6"
+  },
+  "name": "Utkarsh",
+  "email": "22mcsa10@iiitdmj.ac.in",
+  "password": "123@asd",
+  "userLinks": [],
+  "__v": 0
+}]
