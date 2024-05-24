@@ -6,7 +6,8 @@ LinkHub is a full-stack web application created using the MERN (MongoDB, Express
 
 - Demo Hub view: [Hub view](https://linkhub-frontend-deploy.vercel.app/shortview/lvu3d80y)
 
-- Demo Page view: [Page view](https://linkhub-frontend-deploy.vercel.app/pageview/lvu3d80y)
+- Demo Page view: [Page view](https://linkhub-frontend-deploy.vercel.app/pageview/lvu3d80y) (only in Desktop mode)
+
 
 
 ![LinkHub Logo](./show_images/logo-white.png)
