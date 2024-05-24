@@ -2,7 +2,7 @@
 # LinkHub
 
 LinkHub is a full-stack web application created using the MERN (MongoDB, Express, React, Node.js) stack. It enables users to create personalized linktrees or personal pages, offering a platform to manage and share links effectively.
-- Visit our website: [LinkHub](https://linkhub-frontend-deploy-ghe8hpq39-vishal-kumar-s-projects.vercel.app/)
+- Visit our website: [LinkHub](https://linkhub-frontend-deploy.vercel.app/)
 
 ![LinkHub Logo](./show_images/logo-white.png)
 ## Table of Contents
