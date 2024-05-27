@@ -18,6 +18,8 @@ export default function NotFound404() {
           <p>
             We're sorry, the page you requested could not be found. Please go
             back to the homepage!
+            <br></br>
+            It may be because of this page is not <b style={{fontWeight:600}} >Published</b> yet or <b style={{fontWeight:600}} >Deleted</b> or <b style={{fontWeight:600}} >Never Created.</b>
           </p>
           <Link to={'/'}>GO Home</Link>
         </div>

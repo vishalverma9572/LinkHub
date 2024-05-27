@@ -6,15 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faPlus,faUserCircle  } from "@fortawesome/free-solid-svg-icons";
 import Nav from "../components/Nav";
 import CardList from "../components/CardsList";
+import Loader from "../components/Loader";
+import { RxHamburgerMenu } from "react-icons/rx";
+
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Dashboard(props) {
   const [data, setData] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [Loading, setLoading] = React.useState(true);
+  const [isNavOpen, setIsNavOpen] = React.useState(false);
   useEffect(() => {
     document.title = "Dashboard | LinkHub";
     async function fetchData() {
       // Fetch data from the backend endpoint with Authorization header
-      const response = await fetch("http://localhost:4500/dashboard", {
+      const response = await fetch(`${backendUrl}/dashboard`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -30,17 +37,22 @@ export default function Dashboard(props) {
         // Redirect to login if token is invalid or expired
         window.location.href = "/signin";
       }
+      setLoading(false);
       // Handle the fetched data here (e.g., update state)
     }
     if (localStorage.getItem("token") === null) {
       window.location.href = "/signin";
+      
     }
     fetchData(); // Call the fetchData function when the component mounts
   }, []); // Empty dependency array ensures this effect runs only once on mount
-
+  const toggleNav = () => {
+    document.querySelector('.dashboard_div nav').classList.toggle('open');
+  };
   
   return (
     <div className="dashboard_div">
+      <div className={`hamburger`} onClick={toggleNav}><RxHamburgerMenu/></div>
       <Nav logoutfun={props.logoutfun}/>
       
       <main className="dashboard_container">
@@ -84,6 +96,7 @@ export default function Dashboard(props) {
           />
           </form>
           
+          {Loading && <center><Loader /></center>}
           <CardList userLinks={data && data.user.userLinks} searchQuery={searchQuery}/>
         </div> 
         

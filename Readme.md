@@ -2,6 +2,14 @@
 # LinkHub
 
 LinkHub is a full-stack web application created using the MERN (MongoDB, Express, React, Node.js) stack. It enables users to create personalized linktrees or personal pages, offering a platform to manage and share links effectively.
+- Visit our website: [LinkHub](https://linkhub-frontend-deploy.vercel.app/)
+
+- Demo Hub view: [Hub view](https://linkhub-frontend-deploy.vercel.app/shortview/lvu3d80y)
+
+- Demo Page view: [Page view](https://linkhub-frontend-deploy.vercel.app/pageview/lvu3d80y) (only in Desktop mode)
+
+
+
 ![LinkHub Logo](./show_images/logo-white.png)
 ## Table of Contents
 
@@ -108,7 +116,7 @@ To set up the project locally, follow these steps:
    npm start
    ```
 
-   This will start the backend server on `http://localhost:5000`.
+   This will start the backend server on `http://localhost:4500`.
 
 2. **Start the frontend server:**
 
@@ -232,6 +240,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any inquiries or feedback, please reach out via email: vishalverma9572@gmail.com
 
----
 
-This README provides a structured and comprehensive overview of your LinkHub project. Make sure to replace placeholders like `https://github.com/vishalverma9572/LinkHub.git` with actual values relevant to your project. Additionally, you can expand sections like API Endpoints and Contributing based on the specific details and guidelines of your project.
+
+---

@@ -5,6 +5,9 @@ import { faLink, faEye, faEllipsisH, faShare, faEdit, faTrash, faWifi,faUnlink }
 import { useNavigate } from 'react-router-dom';
 
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+
 const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
   const navigate = useNavigate();
   const reftreshLinks = () => {
@@ -41,7 +44,7 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
         Authorization: `${localStorage.getItem('token')}`,
       },
     };
-    fetch(`http://localhost:4500/delete-link/${linkid}`, requestOptions)
+    fetch(`${backendUrl}/delete-link/${linkid}`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -66,7 +69,7 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
         Authorization: `${localStorage.getItem('token')}`,
       },
     };
-    fetch(`http://localhost:4500/publish-link/${linkid}`, requestOptions)
+    fetch(`${backendUrl}/publish-link/${linkid}`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -89,7 +92,7 @@ const HorizontalCard = ({ linkName, views, publish, lastupdated, linkid }) => {
         Authorization: `${localStorage.getItem('token')}`,
       },
     };
-    fetch(`http://localhost:4500/unpublish-link/${linkid}`, requestOptions)
+    fetch(`${backendUrl}/unpublish-link/${linkid}`, requestOptions)
 
       .then((response) => response.json())
       .then((data) => {

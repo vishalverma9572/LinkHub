@@ -14,6 +14,8 @@ import logo from "../images/linkhub-high-resolution-logo-transparent.png";
 import { FaEllipsisV } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 // import  toggleMenu  from "../components/Togglemenu";
 import './Shortview.css'
@@ -62,7 +64,7 @@ export default function Preview() {
 //     document.title = "Preview | LinkHub";
 //     async function fetchData() {
 //       // Fetch data from the backend endpoint with Authorization header
-//       const response = await fetch("http://localhost:4500/dashboard", {
+//       const response = await fetch(`${backendUrl}/dashboard`, {
 //         method: "GET",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -110,7 +112,7 @@ export default function Preview() {
 //     const fetchData = async () => {
 //       try {
 //         const response = await fetch(
-//           `http://localhost:4500/view-link/${linkid}`
+//           `${backendUrl}/view-link/${linkid}`
 //         );
 //         const data = await response.json();
 //         if (data.status == "success") {

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 const ForgotPassword = () => {
   document.title = 'Forgot Password| LinkHub';
@@ -14,7 +16,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       // Call your API to send the reset password email
-      const response = await fetch('http://localhost:4500/forgot-password', {
+      const response = await fetch(`${backendUrl}/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

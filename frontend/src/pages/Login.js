@@ -1,13 +1,15 @@
 //not in use now
 import React from 'react'
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function Login() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     async function loginfunction(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:4500/login', {
+        const response = await fetch(`${backendUrl}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

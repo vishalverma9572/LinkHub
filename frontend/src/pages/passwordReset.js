@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import './passwordreset.css';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const PasswordReset = () => {
   document.title = 'Reset Password| LinkHub';
   const [newPassword, setNewPassword] = useState('');
@@ -12,6 +14,7 @@ const PasswordReset = () => {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +35,7 @@ const PasswordReset = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:4500/reset-password/${token}`, { newPassword });
+      const response = await axios.post(`${backendUrl}/reset-password/${token}`, { newPassword });
       if (response.status === 200) {
         setSuccess(true);
         navigate('/signin');

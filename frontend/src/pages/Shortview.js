@@ -15,9 +15,13 @@ import { FaEllipsisV } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 
 import  toggleMenu  from "../components/Togglemenu";
+import Loader from "../components/Loader";
 // import './Shortview.css'
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function Shortview() {
+  
   const { linkid } = useParams();
 
   const [Data, setData] = useState({
@@ -45,7 +49,7 @@ export default function Shortview() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4500/view-link/${linkid}`
+          `${backendUrl}/view-link/${linkid}`
         );
         const data = await response.json();
         if (data.status == "success") {
@@ -75,6 +79,7 @@ export default function Shortview() {
             <BsThreeDots onClick={toggleMenu} />
         </div>
         </div> */}
+          {Loading? <h3 style={{marginTop:"-20px" ,fontFamily: "'Raleway', sans-serif", fontWeight:500,color:'white'}} >Loading...</h3>:
           <div className="Container">
             <div className="img_ctn">
               {Data.profileImage && (
@@ -159,7 +164,7 @@ export default function Shortview() {
             </div>
 
 
-          </div>
+          </div>}
         </div>
       ) : (
         <NotFound404 />

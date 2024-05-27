@@ -6,10 +6,12 @@ export default function Register() {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
     async function registerfunction(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:4500/register', {
+        const response = await fetch(`${backendUrl}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

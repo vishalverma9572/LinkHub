@@ -16,6 +16,9 @@ import { BsThreeDots } from "react-icons/bs";
 
 import  toggleMenu  from "../components/Togglemenu";
 import './Fullview.css'
+import Loader from "../components/Loader";
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 // import Footer from "../components/Footer";
 // import './Shortview.css'
 
@@ -47,7 +50,7 @@ export default function Fullview() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4500/view-link/${linkid}`
+          `${backendUrl}/view-link/${linkid}`
         );
         const data = await response.json();
         if (data.status == "success") {
@@ -91,8 +94,12 @@ export default function Fullview() {
   return (
     <>
       {!Error ? (
+                
                 <div className="fullview-container">
                 {/* Top Section */}
+                {Loading && <center style={{marginTop:"100px" }}><Loader />
+                <h3 style={{marginTop:"-20px" ,fontFamily: "'Raleway', sans-serif", fontWeight:500}} >Loading...</h3>
+                </center>}
                 <div className="top-section">
                   {/* Left Side: Profile Image */}
                   <div className="profile-image-container">

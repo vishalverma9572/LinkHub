@@ -412,5 +412,16 @@
     border: none;
     cursor: pointer;
   }
+
+  /* for phone view show only form conatainer */
+  @media screen and (max-width: 768px) {
+    .Create_page .Side_container {
+      display: none;
+    }
+    .Create_page .Create_container {
+      margin: auto;
+      width: 98%;
+    }
+  }
   
 

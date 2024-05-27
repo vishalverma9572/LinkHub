@@ -4,11 +4,13 @@
 /frontend/node_modules
 /Backend/node_modules
 /Backend/.env
+/frontend/.env
 /frontend/.pnp
 /frontend/.pnp.js
 
 # testing
 /frontend/coverage
+
 
 # production
 /frontend/build

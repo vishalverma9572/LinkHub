@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const secret = 'hsl7i65544547h**5&&$';
+require('dotenv').config();
+const secret = process.env.JWT_SECRET;
+
 
 const generateToken = (email) => {
     const payload = { email };

@@ -20,10 +20,11 @@ const authenticate = require('./Authenticate/authenticate').authenticate;
 const generateToken = require('./Authenticate/authenticate').generateToken;
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const crypto = require('crypto');
 
-mongoose.connect('mongodb://127.0.0.1:27017/linkhub', {
-  // connection options (if any)
-});
+
+console.log(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, {  }) .catch(err => console.error('Error connecting to MongoDB:', err));
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -84,7 +85,7 @@ app.post('/register', async (req, res) => {
               <h3>Hello ${name}!, welcome to our app!</h3>
               
               <p>We're excited to have you on board. Our app is a link hub that allows you to easily share all your links in one place. We hope you enjoy using it!</p>
-              <a href="http://localhost:3000/" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit Our Website</a>
+              <a href=${process.env.Frontend_URL}style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit Our Website</a>
               <hr style="margin-top: 20px; border: none; border-top: 1px solid #ccc;">
               <p style="margin-top: 20px;">Team LinkHub</p>
               `
@@ -133,7 +134,7 @@ app.post('/forgot-password', async (req, res) => {
     return res.status(404).json({ error: 'User not found' });
   }
 
-  const resetToken = Math.random().toString(36).substr(2, 10);
+  const resetToken = crypto.randomBytes(20).toString('hex');
   user.resetToken = resetToken;
   await user.save();
 
@@ -147,7 +148,7 @@ app.post('/forgot-password', async (req, res) => {
               <h3>Hello LinkHub User!</h3>
               
               <p>Click on this link to reset your password!</p>
-              <a href="http://localhost:3000/set-password/${resetToken}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit This Link</a>
+              <a href="${process.env.Frontend_URL}/set-password/${resetToken}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Visit This Link</a>
               <p>If you did not initiate this change, Kindly change your password or contact us immediately.</p>
               <hr style="margin-top: 20px; border: none; border-top: 1px solid #ccc;">
               <p style="margin-top: 20px;">Team LinkHub</p>

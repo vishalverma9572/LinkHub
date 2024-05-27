@@ -173,7 +173,9 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-
+.dashboard_div .hamburger{
+  display: none;
+}
 
 
 .dashboard_container .header .profile_icon {
@@ -356,3 +358,57 @@
   margin-left: 20px;
   text-align: center;
 }
+.div_content .menu .dropdown-content{
+  width: max-content;
+  padding: 30px;
+}
+/* Add this to your existing CSS */
+
+@media (max-width: 768px) {
+  .dashboard_div .hamburger {
+   display: block;
+   position: fixed;
+   z-index: 1000  ;
+   top: 25px;
+   left:20px;
+    font-size: 1.7em;
+  }
+  .dashboard_div {
+    flex-direction: row;
+  }
+  .dashboard_div nav {
+    display:none;
+    z-index: 100;
+    position: fixed;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+   
+    
+  }
+  .dashboard_div main{
+    width: 100%;
+  }
+  .dashboard_div main  .div_content form{
+    display: block;
+    flex-direction: row;
+  }
+  .dashboard_div main  .div_content .search-bar{
+    width: 90%;
+    margin-left: 5%;
+  }
+  .dashboard_div main  .div_content {
+    width: 100%;
+  }
+ 
+  .div_content .menu .dropdown-content{
+    width: max-content;
+    padding: 30px;
+  }
+  .dashboard_div .open{
+    display: flex;
+  }
+  
+}
+
+

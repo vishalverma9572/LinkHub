@@ -5,14 +5,24 @@ import './Dashboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import Nav from '../components/Nav';
+import Loader from '../components/Loader';
+import { RxHamburgerMenu } from "react-icons/rx";
+
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const ProfilePage = (props) => {
     const [data, setData] = React.useState(null);
+    const [Loading, setLoading] = React.useState(true);
+    const [isNavOpen, setIsNavOpen] = React.useState(false);
+    const toggleNav = () => {
+      document.querySelector('.dashboard_div nav').classList.toggle('open');
+    };
     useEffect(() => {
         document.title = "Profile | LinkHub";
         async function fetchData() {
           // Fetch data from the backend endpoint with Authorization header
-          const response = await fetch("http://localhost:4500/dashboard", {
+          const response = await fetch(`${backendUrl}/dashboard`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -24,6 +34,7 @@ const ProfilePage = (props) => {
           const data = await response.json();
           console.log(data);
           setData(data);
+          setLoading(false);
           if (data.status === "failed") {
             // Redirect to login if token is invalid or expired
             window.location.href = "/signin";
@@ -66,7 +77,7 @@ const ProfilePage = (props) => {
     }else {
       // Logic to handle password change (e.g., call backend API)
       // Simulating a success message (replace with actual API call)
-      const data = fetch('http://localhost:4500/update-password', {
+      const data = fetch(`${backendUrl}/update-password`, {
         method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',
@@ -107,9 +118,12 @@ const ProfilePage = (props) => {
 
   return (
     <div className="dashboard_div">
+    <div className={`hamburger`} onClick={toggleNav}><RxHamburgerMenu/></div>
     <Nav logoutfun={props.logoutfun} />
     <main className="profile-container dashboard_container">
       <h1 className='dashboard_title'>Profile Information</h1>
+      {Loading && <div style={{marginLeft: '50px', height:'60px' }}><Loader /></div>}
+      {!Loading && 
       <div className="profile-details">
         <div className="profile-item">
           <FontAwesomeIcon icon={faUser} className="icon" />
@@ -122,6 +136,7 @@ const ProfilePage = (props) => {
           <span>{user && user.email}</span>
         </div>
       </div>
+      }
       <div className="password-change">
         <h2>Change Password</h2>
         

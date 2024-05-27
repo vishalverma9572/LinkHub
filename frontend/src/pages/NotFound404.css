@@ -87,9 +87,30 @@ body .container404page{
     
 }
 
-@media(min-width: 640px){
-    
-    .container404page .container{
+@media (max-width: 768px){
+   
+    body .container404page{
+        padding-top: 0;
+        margin: auto;
+        width: 100%;
+    }
+    body .container404page .container img{
+        width: 100%;
+    }
+    body .container404page .container{
+        all:unset;
+        width: 90%;
+        margin: auto;
+        
+        
+    }
+    body .container404page .container .header h3{
+       
+        font-size: 2rem;
+        color: white;
+        text-align: center;
+    }
+    /* .container404page .container{
         max-width: 1200px;
         grid-template-columns: repeat(2,1fr);
         gap: 2rem;
@@ -101,16 +122,7 @@ body .container404page{
     .container404page .container .footer{
         max-width: 300px;
     }
-}
-@media (min-width:1024px){
-    .container404page .container .container{
-        column-gap: 5rem;
-    }
-    .container404page .container .header h1{
-        font-size: 6rem;
-
-    }
-    .container404page .container .header h3{
-        font-size: 2.5rem;
-    }
+    .container404page{
+        padding-top: 0;
+    } */
 }

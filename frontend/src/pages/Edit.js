@@ -21,11 +21,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import uniqid from "uniqid";
+import Loader from "../components/Loader";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function () {
   const [existednames, setExistednames] = React.useState(null);
   const [alreadyExists, setAlreadyExists] = React.useState(false);
   const [quillvalue, setQuillValue] = React.useState("");
+  const [Loading, setLoading] = React.useState(true);
   const [formData, setFormData] = useState({
     linkid: "",
     published: false,
@@ -98,7 +101,7 @@ export default function () {
 
     async function fetchData() {
       // Fetch data from the backend endpoint with Authorization header
-      const response = await fetch("http://localhost:4500/dashboard", {
+      const response = await fetch(`${backendUrl}/dashboard`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +134,7 @@ export default function () {
       async function fetchLinkData() {
         // Fetch data from the backend endpoint with Authorization header
         const response = await fetch(
-          `http://localhost:4500/get-link/${linkid}`,
+          `${backendUrl}/get-link/${linkid}`,
           {
             method: "GET",
             headers: {
@@ -154,7 +157,7 @@ export default function () {
         setExistednames((prev) =>
           prev.filter((name) => name !== data.content.name)
         );
-
+        setLoading(false);
         let hyperlinks = data.content.hyperlinks;
         // Transform the hyperlinks array
         const newNames = [];
@@ -214,8 +217,10 @@ export default function () {
     try {
       // Send form data to server using Axios
       // await axios.post("/api/formdata", formData);
+      setLoading(true);
       if (alreadyExists) {
         alert("Alias of this name already exists");
+        setLoading(false);
         return;
       }
       alert(" submitting Form data...");
@@ -229,7 +234,7 @@ export default function () {
       };
       let x = JSON.stringify(tosaveformdata);
       console.log("datatype of x is", x);
-      const response = await fetch("http://localhost:4500/update-link", {
+      const response = await fetch(`${backendUrl}/update-link`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -248,14 +253,18 @@ export default function () {
         } else {
           alert(`${message}`);
         }
+        setLoading(false);
       }
       if (data.status === "success") {
+        setLoading(false);
         window.location.href = "/dashboard";
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error submitting form data:", error);
       //
       alert("Error submitting form data");
+      setLoading(false);
     }
   };
 
@@ -407,11 +416,15 @@ export default function () {
           {/* <button onClick={handlepreview}>Preview</button> */}
         </div>
       </div>
+      
       <div className="Create_container">
+        
+
         <form onSubmit={handleSubmit} className="form">
           <button type="submit" className="create_submit">
             Submit
           </button>
+          {Loading && <center><Loader /></center>}
           <div>
             <div className="img-area">
               <input

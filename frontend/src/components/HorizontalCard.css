@@ -152,4 +152,51 @@
   color: #fff;
   transform: translateY(-2px) translateZ(4px);
 }
+
+/* //styling dor mobile view  */
+@media screen and (max-width: 600px) {
+  .horizontal-card {
+    padding: 10px;
+  }
   
+  .horizontal-card .card-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .horizontal-card .icon {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .horizontal-card .link-details {
+    width: 100%;
+  }
+  
+  .horizontal-card .views {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .horizontal-card .menu {
+    font-size: 20px;
+  }
+  
+  .horizontal-card .dropdown-content {
+    right: 0;
+  }
+  
+  .horizontal-card .dropdown-content button {
+    padding: 10px 0;
+  }
+  .horizontal-card .lastupdated{
+    margin-right: 0;
+  }
+  .horizontal-card .delete-dialog{
+    width: 120%;
+    max-width: 120%;
+  }
+  .horizontal-card .delete-dialog button{
+    margin-bottom: 30px;
+  }
+}

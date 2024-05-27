@@ -23,8 +23,12 @@ import "react-quill/dist/quill.snow.css";
 
 import axios from "axios";
 import uniqid from "uniqid";
+import Loader from "../components/Loader";
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function () {
+  const [Loading,setLoading]=React.useState(false);
   const [existednames, setExistednames] = React.useState(null);
   const [alreadyExists, setAlreadyExists] = React.useState(false);
   const [quillvalue, setQuillValue] = useState("");
@@ -61,7 +65,7 @@ export default function () {
     document.title = "Create | LinkHub";
     async function fetchData() {
       // Fetch data from the backend endpoint with Authorization header
-      const response = await fetch("http://localhost:4500/dashboard", {
+      const response = await fetch(`${backendUrl}/dashboard`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -119,8 +123,10 @@ export default function () {
     try {
       // Send form data to server using Axios
       // await axios.post("/api/formdata", formData);
+      setLoading(true);
       if (alreadyExists) {
         alert("Alias of this name already exists");
+        setLoading(false);
         return;
       }
       alert("Form data submitted successfully");
@@ -135,7 +141,7 @@ export default function () {
       };
       let x = JSON.stringify(tosaveformdata);
       console.log("datatype of x is", x);
-      const response = await fetch("http://localhost:4500/create-link", {
+      const response = await fetch(`${backendUrl}/create-link`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,11 +153,14 @@ export default function () {
 
       if (data.status === "failed") {
         // Redirect to login if token is invalid or expired
-
+        
         window.location.href = "/signin";
+        setLoading(false);
+
       }
       if (data.status === "success") {
         window.location.href = "/dashboard";
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error submitting form data:", error);
@@ -163,6 +172,7 @@ export default function () {
       } else {
         alert(`${message}`);
       }
+      setLoading(false);
     }
   };
 
@@ -319,6 +329,7 @@ export default function () {
           <button type="submit" className="create_submit">
             Submit
           </button>
+          {Loading && <center><Loader /></center>}
           <div>
             <div className="img-area">
               <input
