@@ -7,6 +7,7 @@
 /frontend/.env
 /frontend/.pnp
 /frontend/.pnp.js
+/linkub.users.json
 
 # testing
 /frontend/coverage
